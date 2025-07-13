@@ -2,6 +2,8 @@
 
 A web application that collects and displays Twitch clips of streamers participating in the "Minecraft Minute" game.
 
+**Live Website:** [https://minecraft-minute.ostof.dev/](https://minecraft-minute.ostof.dev/)
+
 ## What is Minecraft Minute?
 
 Minecraft Minute is a daily game where players share one character, each playing for one minute per day, continuing from where the last left off.
