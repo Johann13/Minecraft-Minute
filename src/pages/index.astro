@@ -2,7 +2,7 @@
 import {actions} from "astro:actions";
 import Layout from '../layouts/Layout.astro';
 import AddClipForm from "../components/AddClipForm";
-import TableClipTile from "../components/TableClipTile.astro";
+import ClipTile from "../components/ClipTile.astro";
 import LoginSection from "../components/LoginSection.astro";
 import ExplainerSection from "../components/ExplainerSection";
 
@@ -232,13 +232,13 @@ const {data: clips, error} = await Astro.callAction(actions.getClips, order)
 
               <div class="flex flex-col gap-4">
                 {clips.map(clip => (
-                        <TableClipTile clip={clip}/>
+                        <ClipTile clip={clip}/>
                 ))}
               </div>
               <ExplainerSection client:only="solid-js"/>
       )}
 
       {!user && (
-              <LoginSection client:only="solid-js"/>)}
+              <LoginSection />)}
     </div>
 </Layout>
