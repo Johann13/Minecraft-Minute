@@ -1,0 +1,52 @@
+### get app token
+POST https://id.twitch.tv/oauth2/token?
+    client_id={{TWITCH_CLIENT_ID}}
+    &client_secret={{TWITCH_CLIENT_SECRET}}
+    &grant_type=client_credentials
+Accept: application/json
+
+> {%
+    const body = response.body
+    const access_token = body['access_token']
+    client.global.set("TWITCH_APP_TOKEN", access_token)
+%}
+
+### GET Clip
+# curl -X GET 'https://api.twitch.tv/helix/clips?id=AwkwardHelplessSalamanderSwiftRage'
+#-H 'Authorization: Bearer TOKEN'
+#-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+< {%
+    // const token = client.global.get('access_token')
+%}
+GET https://api.twitch.tv/helix/clips?id=CrepuscularEasyDinosaurPeanutButterJellyTime-9a24HZ8YB_or4ps_
+Authorization: Bearer {{TWITCH_APP_TOKEN}}
+Client-Id: {{TWITCH_CLIENT_ID}}
+
+
+
+
+
+###
+
+### GET Video
+# curl -X GET 'https://api.twitch.tv/helix/clips?id=AwkwardHelplessSalamanderSwiftRage'
+#-H 'Authorization: Bearer TOKEN'
+#-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+GET https://api.twitch.tv/helix/videos?id=2510582698
+Authorization: Bearer {{TWITCH_APP_TOKEN}}
+Client-Id: {{TWITCH_CLIENT_ID}}
+
+###
+
+
+### GET User
+# curl -X GET 'https://api.twitch.tv/helix/clips?id=AwkwardHelplessSalamanderSwiftRage'
+#-H 'Authorization: Bearer TOKEN'
+#-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+GET https://api.twitch.tv/helix/users?login=ostof
+Authorization: Bearer {{TWITCH_APP_TOKEN}}
+Client-Id: {{TWITCH_CLIENT_ID}}
+
+###

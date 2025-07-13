@@ -1,0 +1,36 @@
+{
+  "name": "minecraft-minute",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "cf:preview": "npx astro build && npx wrangler dev --port 3000",
+    "cf:typegen": "wrangler types",
+
+    "cf:deploy": "npm run build && wrangler deploy",
+
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:dev": "wrangler d1 migrations apply DB --local",
+    "db:dev": "npm run db:generate && npm run db:migrate:dev",
+
+    "db:migrate": "wrangler d1 migrations apply DB",
+    "db": "npm run db:generate && npm run db:migrate"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
+    "@astrojs/solid-js": "^5.1.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "arctic": "^3.7.0",
+    "astro": "^5.11.0",
+    "drizzle-kit": "^0.31.4",
+    "drizzle-orm": "^0.44.2",
+    "solid-js": "^1.9.7",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "wrangler": "^4.24.3"
+  }
+}

@@ -1,0 +1,961 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: "minecraftia", "sans-serif";
+
+    /*Twitch colors*/
+    --color-twitch: #9146FF;
+    --color-twitch-50: #f6f2ff;
+    --color-twitch-100: #eee8ff;
+    --color-twitch-200: #dfd4ff;
+    --color-twitch-300: #cab1ff;
+    --color-twitch-400: #b085ff;
+    --color-twitch-500: #9146ff;
+    --color-twitch-600: #8d30f7;
+    --color-twitch-700: #7f1ee3;
+    --color-twitch-800: #6a18bf;
+    --color-twitch-900: #57169c;
+    --color-twitch-950: #370b6a;
+
+
+}
+
+@theme {
+    --breakpoint-*: initial;
+    --breakpoint-xs: 480px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+
+    --font-*: initial;
+    --font-sans:
+            Minecraft, Arial, ui-sans-serif, system-ui, -apple-system,
+            BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+            'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-minecraft:
+            Minecraft, Arial, ui-sans-serif, system-ui, -apple-system,
+            BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+            'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-minecrafter:
+            Minecrafter, Minecraft, Arial, ui-sans-serif, system-ui, -apple-system,
+            BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+            'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-minecrafter-alt:
+            Minecrafter Alt, Minecraft, Arial, ui-sans-serif, system-ui, -apple-system,
+            BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+            'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-minecraft-evenings:
+            Minecraft Evenings, Minecraft, Arial, ui-sans-serif, system-ui,
+            -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+            Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono:
+            Monocraft, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            'Liberation Mono', 'Courier New', monospace;
+    --font-monocraft:
+            Monocraft, Minecraft, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            'Liberation Mono', 'Courier New', monospace;
+
+    --color-link: #aaaaff;
+    --color-panel: #c6c6c6;
+    --color-panel-dark: #373737;
+    --color-gold: #ffaa00;
+    --color-gray: #aaaaaa;
+    --color-blue: #5555ff;
+    --color-green: #55ff55;
+    --color-aqua: #55ffff;
+    --color-red: #ff5555;
+    --color-light-purple: #ff55ff;
+    --color-yellow: #ffff55;
+
+    --color-dark-blue: #0000aa;
+    --color-dark-green: #00aa00;
+    --color-dark-aqua: #00aaaa;
+    --color-dark-red: #aa0000;
+    --color-dark-purple: #aa00aa;
+    --color-dark-gray: #555555;
+
+    --color-wool-orange: #d87f33;
+    --color-wool-magenta: #b24cd8;
+    --color-wool-light-blue: #6699d8;
+    --color-wool-yellow: #e5e533;
+    --color-wool-lime: #7fcc19;
+    --color-wool-pink: #f27fa5;
+    --color-wool-gray: #4c4c4c;
+    --color-wool-light-gray: #999999;
+    --color-wool-cyan: #4c7f99;
+    --color-wool-purple: #7f3fb2;
+    --color-wool-blue: #334cb2;
+    --color-wool-brown: #664c33;
+    --color-wool-green: #667f33;
+    --color-wool-red: #993333;
+    --color-wool-black: #191919;
+
+    --color-grass: #79c05a;
+    --color-grass-jungle: #59c93c;
+    --color-grass-dark-forest: #507a32;
+    --color-grass-swamp-green: #4c763c;
+    --color-grass-plains: #91bd59;
+    --color-grass-forest: #79c05a;
+    --color-grass-birch-forest: #88bb67;
+    --color-grass-ocean: #8eb971;
+    --color-grass-meadow: #83bb6d;
+    --color-grass-tiaga: #86b783;
+    --color-grass-snowy: #80b497;
+    --color-grass-swamp: #6a7039;
+    --color-grass-badlands: #90814d;
+    --color-grass-desert: #bfb755;
+
+    --color-foilage: #59ae30;
+    --color-foilage-jungle: #30bb0b;
+    --color-foilage-dark-forest: #507a32;
+    --color-foilage-swamp-green: #4c763c;
+    --color-foilage-plains: #77ab2f;
+    --color-foilage-forest: #59ae30;
+    --color-foilage-birch-forest: #6ba941;
+    --color-foilage-ocean: #71a74d;
+    --color-foilage-meadow: #63a948;
+    --color-foilage-tiaga: #68a464;
+    --color-foilage-snowy: #60a17b;
+    --color-foilage-swamp: #6a7039;
+    --color-foilage-badlands: #9e814d;
+    --color-foilage-desert: #aea42a;
+
+    --color-water: #44aff5;
+
+    --color-water-ocean: #1787d4;
+    --color-water-ocean-warm: #02b0e5;
+    --color-water-ocean-lukewarm: #0d96db;
+    --color-water-ocean-cold: #2080c9;
+    --color-water-ocean-frozen: #2570b5;
+
+    --color-water-forest: #1e97f2;
+    --color-water-forest-birch: #0677ce;
+    --color-water-forest-birch-hills: #0a74c4;
+    --color-water-forest-dark: #3b6cd1;
+    --color-water-forest-flower: #20a3cc;
+
+    --color-water-meadow: #0e4ecf;
+    --color-water-river: #0084ff;
+    --color-water-mountain-gravel: #0e63ab;
+    --color-water-mountain: #007bf7;
+    --color-water-beach: #157cab;
+    --color-water-beach-snowy: #1463a5;
+    --color-water-stone-shore: #0d67bb;
+    --color-water-jungle: #14a2c5;
+    --color-water-jungle-hills: #1b9ed8;
+    --color-water-tiaga: #287082;
+    --color-water-tiaga-hills: #236583;
+    --color-water-tiaga-snowy: #205e83;
+    --color-water-savanna: #2c8b9c;
+    --color-water-savanna-plateau: #2590a8;
+    --color-water-desert: #32a598;
+    --color-water-desert-hills: #1a7aa1;
+    --color-water-badlands: #4e7f81;
+    --color-water-badlands-plateau: #55809e;
+    --color-water-swamp: #4c6559;
+    --color-water-swamp-hills: #4c6156;
+    --color-water-mushroom: #8a8997;
+    --color-water-mushroom-shore: #818193;
+    --color-water-end: #62529e;
+    --color-water-nether: #905957;
+
+    --background-image-sign: url(/imgs/ui/sign.png);
+    --background-image-block-air: url('/imgs/blocks/air.png');
+    --background-image-block-allium: url('/imgs/blocks/allium.png');
+    --background-image-block-andesite-smooth: url('/imgs/blocks/andesite-smooth.png');
+    --background-image-block-andesite: url('/imgs/blocks/andesite.png');
+    --background-image-block-bedrock: url('/imgs/blocks/bedrock.png');
+    --background-image-block-blue-orchid: url('/imgs/blocks/blue-orchid.png');
+    --background-image-block-bookshelf: url('/imgs/blocks/bookshelf.png');
+    --background-image-block-brick: url('/imgs/blocks/brick.png');
+    --background-image-block-bricks-beta: url('/imgs/blocks/bricks-beta.png');
+    --background-image-block-cactus-side: url('/imgs/blocks/cactus-side.png');
+    --background-image-block-cake-side: url('/imgs/blocks/cake-side.png');
+    --background-image-block-carved-pumpkin-on: url('/imgs/blocks/carved-pumpkin-on.png');
+    --background-image-block-carved-pumpkin: url('/imgs/blocks/carved-pumpkin.png');
+    --background-image-block-cauldron-side: url('/imgs/blocks/cauldron-side.png');
+    --background-image-block-clay: url('/imgs/blocks/clay.png');
+    --background-image-block-coal-block: url('/imgs/blocks/coal-block.png');
+    --background-image-block-coal-ore: url('/imgs/blocks/coal-ore.png');
+    --background-image-block-cobblestone-beta: url('/imgs/blocks/cobblestone-beta.png');
+    --background-image-block-cobblestone-mossy-beta: url('/imgs/blocks/cobblestone-mossy-beta.png');
+    --background-image-block-cobblestone-mossy: url('/imgs/blocks/cobblestone-mossy.png');
+    --background-image-block-cobblestone: url('/imgs/blocks/cobblestone.png');
+    --background-image-block-command-block: url('/imgs/blocks/command-block.png');
+    --background-image-block-crafting-table-front: url('/imgs/blocks/crafting-table-front.png');
+    --background-image-block-crafting-table-side: url('/imgs/blocks/crafting-table-side.png');
+    --background-image-block-crafting-table-top: url('/imgs/blocks/crafting-table-top.png');
+    --background-image-block-dandelion: url('/imgs/blocks/dandelion.png');
+    --background-image-block-destroy-0: url('/imgs/blocks/destroy-0.png');
+    --background-image-block-destroy-1: url('/imgs/blocks/destroy-1.png');
+    --background-image-block-destroy-2: url('/imgs/blocks/destroy-2.png');
+    --background-image-block-destroy-3: url('/imgs/blocks/destroy-3.png');
+    --background-image-block-destroy-4: url('/imgs/blocks/destroy-4.png');
+    --background-image-block-destroy-5: url('/imgs/blocks/destroy-5.png');
+    --background-image-block-destroy-6: url('/imgs/blocks/destroy-6.png');
+    --background-image-block-destroy-7: url('/imgs/blocks/destroy-7.png');
+    --background-image-block-destroy-8: url('/imgs/blocks/destroy-8.png');
+    --background-image-block-destroy-9: url('/imgs/blocks/destroy-9.png');
+    --background-image-block-diamond-block-beta: url('/imgs/blocks/diamond-block-beta.png');
+    --background-image-block-diamond-block: url('/imgs/blocks/diamond-block.png');
+    --background-image-block-diamond-ore: url('/imgs/blocks/diamond-ore.png');
+    --background-image-block-diorite-smooth: url('/imgs/blocks/diorite-smooth.png');
+    --background-image-block-diorite: url('/imgs/blocks/diorite.png');
+    --background-image-block-dirt: url('/imgs/blocks/dirt.png');
+    --background-image-block-dispenser-front: url('/imgs/blocks/dispenser-front.png');
+    --background-image-block-dropper-front: url('/imgs/blocks/dropper-front.png');
+    --background-image-block-emerald-block: url('/imgs/blocks/emerald-block.png');
+    --background-image-block-emerald-ore-beta: url('/imgs/blocks/emerald-ore-beta.png');
+    --background-image-block-emerald-ore: url('/imgs/blocks/emerald-ore.png');
+    --background-image-block-enchanting-table-side: url('/imgs/blocks/enchanting-table-side.png');
+    --background-image-block-end-stone: url('/imgs/blocks/end-stone.png');
+    --background-image-block-endframe-side: url('/imgs/blocks/endframe-side.png');
+    --background-image-block-fire: url('/imgs/blocks/fire.png');
+    --background-image-block-furnace-front-on: url('/imgs/blocks/furnace-front-on.png');
+    --background-image-block-furnace-front: url('/imgs/blocks/furnace-front.png');
+    --background-image-block-furnace-side: url('/imgs/blocks/furnace-side.png');
+    --background-image-block-glass-black: url('/imgs/blocks/glass-black.png');
+    --background-image-block-glass-blue: url('/imgs/blocks/glass-blue.png');
+    --background-image-block-glass-brown: url('/imgs/blocks/glass-brown.png');
+    --background-image-block-glass-cyan: url('/imgs/blocks/glass-cyan.png');
+    --background-image-block-glass-gray: url('/imgs/blocks/glass-gray.png');
+    --background-image-block-glass-green: url('/imgs/blocks/glass-green.png');
+    --background-image-block-glass-light-blue: url('/imgs/blocks/glass-light-blue.png');
+    --background-image-block-glass-lime: url('/imgs/blocks/glass-lime.png');
+    --background-image-block-glass-magenta: url('/imgs/blocks/glass-magenta.png');
+    --background-image-block-glass-orange: url('/imgs/blocks/glass-orange.png');
+    --background-image-block-glass-pink: url('/imgs/blocks/glass-pink.png');
+    --background-image-block-glass-purple: url('/imgs/blocks/glass-purple.png');
+    --background-image-block-glass-red: url('/imgs/blocks/glass-red.png');
+    --background-image-block-glass-silver: url('/imgs/blocks/glass-silver.png');
+    --background-image-block-glass-white: url('/imgs/blocks/glass-white.png');
+    --background-image-block-glass-yellow: url('/imgs/blocks/glass-yellow.png');
+    --background-image-block-glass: url('/imgs/blocks/glass.png');
+    --background-image-block-glowstone: url('/imgs/blocks/glowstone.png');
+    --background-image-block-gold-block-beta: url('/imgs/blocks/gold-block-beta.png');
+    --background-image-block-gold-block: url('/imgs/blocks/gold-block.png');
+    --background-image-block-gold-ore: url('/imgs/blocks/gold-ore.png');
+    --background-image-block-granite-smooth: url('/imgs/blocks/granite-smooth.png');
+    --background-image-block-granite: url('/imgs/blocks/granite.png');
+    --background-image-block-grass-side: url('/imgs/blocks/grass-side.png');
+    --background-image-block-gravel-beta: url('/imgs/blocks/gravel-beta.png');
+    --background-image-block-gravel: url('/imgs/blocks/gravel.png');
+    --background-image-block-hardened-clay-black: url('/imgs/blocks/hardened-clay-black.png');
+    --background-image-block-hardened-clay-blue: url('/imgs/blocks/hardened-clay-blue.png');
+    --background-image-block-hardened-clay-brown: url('/imgs/blocks/hardened-clay-brown.png');
+    --background-image-block-hardened-clay-cyan: url('/imgs/blocks/hardened-clay-cyan.png');
+    --background-image-block-hardened-clay-gray: url('/imgs/blocks/hardened-clay-gray.png');
+    --background-image-block-hardened-clay-green: url('/imgs/blocks/hardened-clay-green.png');
+    --background-image-block-hardened-clay-light-blue: url('/imgs/blocks/hardened-clay-light-blue.png');
+    --background-image-block-hardened-clay-lime: url('/imgs/blocks/hardened-clay-lime.png');
+    --background-image-block-hardened-clay-magenta: url('/imgs/blocks/hardened-clay-magenta.png');
+    --background-image-block-hardened-clay-orange: url('/imgs/blocks/hardened-clay-orange.png');
+    --background-image-block-hardened-clay-pink: url('/imgs/blocks/hardened-clay-pink.png');
+    --background-image-block-hardened-clay-purple: url('/imgs/blocks/hardened-clay-purple.png');
+    --background-image-block-hardened-clay-red: url('/imgs/blocks/hardened-clay-red.png');
+    --background-image-block-hardened-clay-silver: url('/imgs/blocks/hardened-clay-silver.png');
+    --background-image-block-hardened-clay-white: url('/imgs/blocks/hardened-clay-white.png');
+    --background-image-block-hardened-clay-yellow: url('/imgs/blocks/hardened-clay-yellow.png');
+    --background-image-block-hardened-clay: url('/imgs/blocks/hardened-clay.png');
+    --background-image-block-hay: url('/imgs/blocks/hay.png');
+    --background-image-block-houstonia: url('/imgs/blocks/houstonia.png');
+    --background-image-block-ice-packed: url('/imgs/blocks/ice-packed.png');
+    --background-image-block-ice: url('/imgs/blocks/ice.png');
+    --background-image-block-iron-bars: url('/imgs/blocks/iron-bars.png');
+    --background-image-block-iron-block-beta: url('/imgs/blocks/iron-block-beta.png');
+    --background-image-block-iron-block: url('/imgs/blocks/iron-block.png');
+    --background-image-block-iron-ore: url('/imgs/blocks/iron-ore.png');
+    --background-image-block-iron-trapdoor: url('/imgs/blocks/iron-trapdoor.png');
+    --background-image-block-item-frame: url('/imgs/blocks/item-frame.png');
+    --background-image-block-jukebox: url('/imgs/blocks/jukebox.png');
+    --background-image-block-ladder: url('/imgs/blocks/ladder.png');
+    --background-image-block-lapis-block-beta: url('/imgs/blocks/lapis-block-beta.png');
+    --background-image-block-lapis-block: url('/imgs/blocks/lapis-block.png');
+    --background-image-block-lapis-ore: url('/imgs/blocks/lapis-ore.png');
+    --background-image-block-lava-still: url('/imgs/blocks/lava-still.png');
+    --background-image-block-leaves-oak-beta: url('/imgs/blocks/leaves-oak-beta.png');
+    --background-image-block-lever: url('/imgs/blocks/lever.png');
+    --background-image-block-log-acacia-top: url('/imgs/blocks/log-acacia-top.png');
+    --background-image-block-log-acacia: url('/imgs/blocks/log-acacia.png');
+    --background-image-block-log-birch-top: url('/imgs/blocks/log-birch-top.png');
+    --background-image-block-log-birch: url('/imgs/blocks/log-birch.png');
+    --background-image-block-log-dark-oak-top: url('/imgs/blocks/log-dark-oak-top.png');
+    --background-image-block-log-dark-oak: url('/imgs/blocks/log-dark-oak.png');
+    --background-image-block-log-jungle-top: url('/imgs/blocks/log-jungle-top.png');
+    --background-image-block-log-jungle: url('/imgs/blocks/log-jungle.png');
+    --background-image-block-log-oak-top: url('/imgs/blocks/log-oak-top.png');
+    --background-image-block-log-oak: url('/imgs/blocks/log-oak.png');
+    --background-image-block-log-spruce-top: url('/imgs/blocks/log-spruce-top.png');
+    --background-image-block-log-spruce: url('/imgs/blocks/log-spruce.png');
+    --background-image-block-melon-side: url('/imgs/blocks/melon-side.png');
+    --background-image-block-mushroom-block-brown: url('/imgs/blocks/mushroom-block-brown.png');
+    --background-image-block-mushroom-block-inside: url('/imgs/blocks/mushroom-block-inside.png');
+    --background-image-block-mushroom-block-red: url('/imgs/blocks/mushroom-block-red.png');
+    --background-image-block-mushroom-block-stem: url('/imgs/blocks/mushroom-block-stem.png');
+    --background-image-block-mushroom-brown: url('/imgs/blocks/mushroom-brown.png');
+    --background-image-block-mushroom-red: url('/imgs/blocks/mushroom-red.png');
+    --background-image-block-mycelium-side: url('/imgs/blocks/mycelium-side.png');
+    --background-image-block-mycelium-top: url('/imgs/blocks/mycelium-top.png');
+    --background-image-block-nether-brick: url('/imgs/blocks/nether-brick.png');
+    --background-image-block-netherrack: url('/imgs/blocks/netherrack.png');
+    --background-image-block-obsidian: url('/imgs/blocks/obsidian.png');
+    --background-image-block-oxeye-daisy: url('/imgs/blocks/oxeye-daisy.png');
+    --background-image-block-paeonia: url('/imgs/blocks/paeonia.png');
+    --background-image-block-piston-front-sticky: url('/imgs/blocks/piston-front-sticky.png');
+    --background-image-block-piston-front: url('/imgs/blocks/piston-front.png');
+    --background-image-block-piston-side: url('/imgs/blocks/piston-side.png');
+    --background-image-block-planks-acacia: url('/imgs/blocks/planks-acacia.png');
+    --background-image-block-planks-birch: url('/imgs/blocks/planks-birch.png');
+    --background-image-block-planks-dark-oak: url('/imgs/blocks/planks-dark-oak.png');
+    --background-image-block-planks-jungle: url('/imgs/blocks/planks-jungle.png');
+    --background-image-block-planks-oak: url('/imgs/blocks/planks-oak.png');
+    --background-image-block-planks-spruce: url('/imgs/blocks/planks-spruce.png');
+    --background-image-block-podzol-side: url('/imgs/blocks/podzol-side.png');
+    --background-image-block-podzol-top: url('/imgs/blocks/podzol-top.png');
+    --background-image-block-poppy: url('/imgs/blocks/poppy.png');
+    --background-image-block-portal: url('/imgs/blocks/portal.png');
+    --background-image-block-prismarine-bricks: url('/imgs/blocks/prismarine-bricks.png');
+    --background-image-block-prismarine-dark: url('/imgs/blocks/prismarine-dark.png');
+    --background-image-block-prismarine-rough-blue: url('/imgs/blocks/prismarine-rough-blue.png');
+    --background-image-block-prismarine-rough-green: url('/imgs/blocks/prismarine-rough-green.png');
+    --background-image-block-prismarine-rough-purple: url('/imgs/blocks/prismarine-rough-purple.png');
+    --background-image-block-prismarine-rough: url('/imgs/blocks/prismarine-rough.png');
+    --background-image-block-pumpkin-side: url('/imgs/blocks/pumpkin-side.png');
+    --background-image-block-quartz-chiseled: url('/imgs/blocks/quartz-chiseled.png');
+    --background-image-block-quartz-ore: url('/imgs/blocks/quartz-ore.png');
+    --background-image-block-quartz-pillar: url('/imgs/blocks/quartz-pillar.png');
+    --background-image-block-quartz: url('/imgs/blocks/quartz.png');
+    --background-image-block-red-sand: url('/imgs/blocks/red-sand.png');
+    --background-image-block-red-sandstone-carved: url('/imgs/blocks/red-sandstone-carved.png');
+    --background-image-block-red-sandstone-smooth: url('/imgs/blocks/red-sandstone-smooth.png');
+    --background-image-block-red-sandstone: url('/imgs/blocks/red-sandstone.png');
+    --background-image-block-redstone-block: url('/imgs/blocks/redstone-block.png');
+    --background-image-block-redstone-lamp-on: url('/imgs/blocks/redstone-lamp-on.png');
+    --background-image-block-redstone-lamp: url('/imgs/blocks/redstone-lamp.png');
+    --background-image-block-redstone-ore: url('/imgs/blocks/redstone-ore.png');
+    --background-image-block-redstone-torch-on: url('/imgs/blocks/redstone-torch-on.png');
+    --background-image-block-redstone-torch: url('/imgs/blocks/redstone-torch.png');
+    --background-image-block-rose: url('/imgs/blocks/rose.png');
+    --background-image-block-sand: url('/imgs/blocks/sand.png');
+    --background-image-block-sandstone-carved: url('/imgs/blocks/sandstone-carved.png');
+    --background-image-block-sandstone-smooth: url('/imgs/blocks/sandstone-smooth.png');
+    --background-image-block-sandstone: url('/imgs/blocks/sandstone.png');
+    --background-image-block-sapling-acacia: url('/imgs/blocks/sapling-acacia.png');
+    --background-image-block-sapling-birch: url('/imgs/blocks/sapling-birch.png');
+    --background-image-block-sapling-dark-oak: url('/imgs/blocks/sapling-dark-oak.png');
+    --background-image-block-sapling-jungle: url('/imgs/blocks/sapling-jungle.png');
+    --background-image-block-sapling-oak: url('/imgs/blocks/sapling-oak.png');
+    --background-image-block-sapling-spruce: url('/imgs/blocks/sapling-spruce.png');
+    --background-image-block-sea-lantern: url('/imgs/blocks/sea-lantern.png');
+    --background-image-block-slime: url('/imgs/blocks/slime.png');
+    --background-image-block-snow: url('/imgs/blocks/snow.png');
+    --background-image-block-soul-sand: url('/imgs/blocks/soul-sand.png');
+    --background-image-block-spawner: url('/imgs/blocks/spawner.png');
+    --background-image-block-sponge-beta: url('/imgs/blocks/sponge-beta.png');
+    --background-image-block-sponge-wet: url('/imgs/blocks/sponge-wet.png');
+    --background-image-block-sponge: url('/imgs/blocks/sponge.png');
+    --background-image-block-stone-brick-carved: url('/imgs/blocks/stone-brick-carved.png');
+    --background-image-block-stone-brick-cracked: url('/imgs/blocks/stone-brick-cracked.png');
+    --background-image-block-stone-brick-mossy: url('/imgs/blocks/stone-brick-mossy.png');
+    --background-image-block-stone-brick: url('/imgs/blocks/stone-brick.png');
+    --background-image-block-stone-slab-double: url('/imgs/blocks/stone-slab-double.png');
+    --background-image-block-stone-slab-full: url('/imgs/blocks/stone-slab-full.png');
+    --background-image-block-stone: url('/imgs/blocks/stone.png');
+    --background-image-block-sugar-cane: url('/imgs/blocks/sugar-cane.png');
+    --background-image-block-tnt: url('/imgs/blocks/tnt.png');
+    --background-image-block-torch: url('/imgs/blocks/torch.png');
+    --background-image-block-trapdoor: url('/imgs/blocks/trapdoor.png');
+    --background-image-block-tulip-orange: url('/imgs/blocks/tulip-orange.png');
+    --background-image-block-tulip-pink: url('/imgs/blocks/tulip-pink.png');
+    --background-image-block-tulip-red: url('/imgs/blocks/tulip-red.png');
+    --background-image-block-tulip-white: url('/imgs/blocks/tulip-white.png');
+    --background-image-block-water-flow: url('/imgs/blocks/water-flow.png');
+    --background-image-block-water-still: url('/imgs/blocks/water-still.png');
+    --background-image-block-web: url('/imgs/blocks/web.png');
+    --background-image-block-wool-black: url('/imgs/blocks/wool-black.png');
+    --background-image-block-wool-blue: url('/imgs/blocks/wool-blue.png');
+    --background-image-block-wool-brown: url('/imgs/blocks/wool-brown.png');
+    --background-image-block-wool-cyan: url('/imgs/blocks/wool-cyan.png');
+    --background-image-block-wool-gray: url('/imgs/blocks/wool-gray.png');
+    --background-image-block-wool-green: url('/imgs/blocks/wool-green.png');
+    --background-image-block-wool-light-blue: url('/imgs/blocks/wool-light-blue.png');
+    --background-image-block-wool-light-gray: url('/imgs/blocks/wool-light-gray.png');
+    --background-image-block-wool-lime: url('/imgs/blocks/wool-lime.png');
+    --background-image-block-wool-magenta: url('/imgs/blocks/wool-magenta.png');
+    --background-image-block-wool-orange: url('/imgs/blocks/wool-orange.png');
+    --background-image-block-wool-pink: url('/imgs/blocks/wool-pink.png');
+    --background-image-block-wool-purple: url('/imgs/blocks/wool-purple.png');
+    --background-image-block-wool-red: url('/imgs/blocks/wool-red.png');
+    --background-image-block-wool-white: url('/imgs/blocks/wool-white.png');
+    --background-image-block-wool-yellow: url('/imgs/blocks/wool-yellow.png');
+    --background-image-item-apple-golden: url('/imgs/items/apple-golden.png');
+    --background-image-item-apple: url('/imgs/items/apple.png');
+    --background-image-item-arrow: url('/imgs/items/arrow.png');
+    --background-image-item-barrier: url('/imgs/items/barrier.png');
+    --background-image-item-bed: url('/imgs/items/bed.png');
+    --background-image-item-beef-cooked: url('/imgs/items/beef-cooked.png');
+    --background-image-item-beef-raw: url('/imgs/items/beef-raw.png');
+    --background-image-item-blaze-powder: url('/imgs/items/blaze-powder.png');
+    --background-image-item-blaze-rod: url('/imgs/items/blaze-rod.png');
+    --background-image-item-boat: url('/imgs/items/boat.png');
+    --background-image-item-bone: url('/imgs/items/bone.png');
+    --background-image-item-book-enchanted: url('/imgs/items/book-enchanted.png');
+    --background-image-item-book-normal: url('/imgs/items/book-normal.png');
+    --background-image-item-book-writable: url('/imgs/items/book-writable.png');
+    --background-image-item-book-written: url('/imgs/items/book-written.png');
+    --background-image-item-bow-0: url('/imgs/items/bow-0.png');
+    --background-image-item-bow-1: url('/imgs/items/bow-1.png');
+    --background-image-item-bow-2: url('/imgs/items/bow-2.png');
+    --background-image-item-bow: url('/imgs/items/bow.png');
+    --background-image-item-bowl: url('/imgs/items/bowl.png');
+    --background-image-item-bread: url('/imgs/items/bread.png');
+    --background-image-item-brewing-stand: url('/imgs/items/brewing-stand.png');
+    --background-image-item-brick: url('/imgs/items/brick.png');
+    --background-image-item-bucket-lava: url('/imgs/items/bucket-lava.png');
+    --background-image-item-bucket-milk: url('/imgs/items/bucket-milk.png');
+    --background-image-item-bucket-water: url('/imgs/items/bucket-water.png');
+    --background-image-item-bucket: url('/imgs/items/bucket.png');
+    --background-image-item-cake: url('/imgs/items/cake.png');
+    --background-image-item-carrot-golden: url('/imgs/items/carrot-golden.png');
+    --background-image-item-carrot-on-a-stick: url('/imgs/items/carrot-on-a-stick.png');
+    --background-image-item-carrot: url('/imgs/items/carrot.png');
+    --background-image-item-cauldron: url('/imgs/items/cauldron.png');
+    --background-image-item-chainmail-boots: url('/imgs/items/chainmail-boots.png');
+    --background-image-item-chainmail-chestplate: url('/imgs/items/chainmail-chestplate.png');
+    --background-image-item-chainmail-helmet: url('/imgs/items/chainmail-helmet.png');
+    --background-image-item-chainmail-leggings: url('/imgs/items/chainmail-leggings.png');
+    --background-image-item-charcoal: url('/imgs/items/charcoal.png');
+    --background-image-item-chicken-cooked: url('/imgs/items/chicken-cooked.png');
+    --background-image-item-chicken-raw: url('/imgs/items/chicken-raw.png');
+    --background-image-item-clay-ball: url('/imgs/items/clay-ball.png');
+    --background-image-item-clock-day: url('/imgs/items/clock-day.png');
+    --background-image-item-clock-night: url('/imgs/items/clock-night.png');
+    --background-image-item-clock: url('/imgs/items/clock.png');
+    --background-image-item-coal: url('/imgs/items/coal.png');
+    --background-image-item-comparator: url('/imgs/items/comparator.png');
+    --background-image-item-compass-down: url('/imgs/items/compass-down.png');
+    --background-image-item-compass-left: url('/imgs/items/compass-left.png');
+    --background-image-item-compass-right: url('/imgs/items/compass-right.png');
+    --background-image-item-compass-up: url('/imgs/items/compass-up.png');
+    --background-image-item-cookie: url('/imgs/items/cookie.png');
+    --background-image-item-diamond-axe: url('/imgs/items/diamond-axe.png');
+    --background-image-item-diamond-boots: url('/imgs/items/diamond-boots.png');
+    --background-image-item-diamond-chestplate: url('/imgs/items/diamond-chestplate.png');
+    --background-image-item-diamond-helmet: url('/imgs/items/diamond-helmet.png');
+    --background-image-item-diamond-hoe: url('/imgs/items/diamond-hoe.png');
+    --background-image-item-diamond-horse-armor: url('/imgs/items/diamond-horse-armor.png');
+    --background-image-item-diamond-leggings: url('/imgs/items/diamond-leggings.png');
+    --background-image-item-diamond-pickaxe: url('/imgs/items/diamond-pickaxe.png');
+    --background-image-item-diamond-shovel: url('/imgs/items/diamond-shovel.png');
+    --background-image-item-diamond-sword: url('/imgs/items/diamond-sword.png');
+    --background-image-item-diamond: url('/imgs/items/diamond.png');
+    --background-image-item-dye-black: url('/imgs/items/dye-black.png');
+    --background-image-item-dye-blue: url('/imgs/items/dye-blue.png');
+    --background-image-item-dye-brown: url('/imgs/items/dye-brown.png');
+    --background-image-item-dye-cyan: url('/imgs/items/dye-cyan.png');
+    --background-image-item-dye-gray: url('/imgs/items/dye-gray.png');
+    --background-image-item-dye-green: url('/imgs/items/dye-green.png');
+    --background-image-item-dye-light-blue: url('/imgs/items/dye-light-blue.png');
+    --background-image-item-dye-lime: url('/imgs/items/dye-lime.png');
+    --background-image-item-dye-magenta: url('/imgs/items/dye-magenta.png');
+    --background-image-item-dye-orange: url('/imgs/items/dye-orange.png');
+    --background-image-item-dye-pink: url('/imgs/items/dye-pink.png');
+    --background-image-item-dye-purple: url('/imgs/items/dye-purple.png');
+    --background-image-item-dye-red: url('/imgs/items/dye-red.png');
+    --background-image-item-dye-silver: url('/imgs/items/dye-silver.png');
+    --background-image-item-dye-white: url('/imgs/items/dye-white.png');
+    --background-image-item-dye-yellow: url('/imgs/items/dye-yellow.png');
+    --background-image-item-egg: url('/imgs/items/egg.png');
+    --background-image-item-emerald: url('/imgs/items/emerald.png');
+    --background-image-item-ender-eye: url('/imgs/items/ender-eye.png');
+    --background-image-item-ender-pearl: url('/imgs/items/ender-pearl.png');
+    --background-image-item-experience-bottle: url('/imgs/items/experience-bottle.png');
+    --background-image-item-feather: url('/imgs/items/feather.png');
+    --background-image-item-fireball: url('/imgs/items/fireball.png');
+    --background-image-item-fireworks-charge-overlay: url('/imgs/items/fireworks-charge-overlay.png');
+    --background-image-item-fireworks-charge: url('/imgs/items/fireworks-charge.png');
+    --background-image-item-fireworks: url('/imgs/items/fireworks.png');
+    --background-image-item-fish-clownfish-raw: url('/imgs/items/fish-clownfish-raw.png');
+    --background-image-item-fish-cod-cooked: url('/imgs/items/fish-cod-cooked.png');
+    --background-image-item-fish-cod-raw: url('/imgs/items/fish-cod-raw.png');
+    --background-image-item-fish-pufferfish-raw: url('/imgs/items/fish-pufferfish-raw.png');
+    --background-image-item-fish-salmon-cooked: url('/imgs/items/fish-salmon-cooked.png');
+    --background-image-item-fish-salmon-raw: url('/imgs/items/fish-salmon-raw.png');
+    --background-image-item-fishing-rod-cast: url('/imgs/items/fishing-rod-cast.png');
+    --background-image-item-fishing-rod-uncast: url('/imgs/items/fishing-rod-uncast.png');
+    --background-image-item-flint-and-steel: url('/imgs/items/flint-and-steel.png');
+    --background-image-item-flint: url('/imgs/items/flint.png');
+    --background-image-item-flower-pot: url('/imgs/items/flower-pot.png');
+    --background-image-item-ghast-tear: url('/imgs/items/ghast-tear.png');
+    --background-image-item-glass-bottle: url('/imgs/items/glass-bottle.png');
+    --background-image-item-glowstone-dust: url('/imgs/items/glowstone-dust.png');
+    --background-image-item-gold-axe: url('/imgs/items/gold-axe.png');
+    --background-image-item-gold-boots: url('/imgs/items/gold-boots.png');
+    --background-image-item-gold-chestplate: url('/imgs/items/gold-chestplate.png');
+    --background-image-item-gold-helmet: url('/imgs/items/gold-helmet.png');
+    --background-image-item-gold-hoe: url('/imgs/items/gold-hoe.png');
+    --background-image-item-gold-horse-armor: url('/imgs/items/gold-horse-armor.png');
+    --background-image-item-gold-ingot: url('/imgs/items/gold-ingot.png');
+    --background-image-item-gold-leggings: url('/imgs/items/gold-leggings.png');
+    --background-image-item-gold-nugget: url('/imgs/items/gold-nugget.png');
+    --background-image-item-gold-pickaxe: url('/imgs/items/gold-pickaxe.png');
+    --background-image-item-gold-shovel: url('/imgs/items/gold-shovel.png');
+    --background-image-item-gold-sword: url('/imgs/items/gold-sword.png');
+    --background-image-item-gunpowder: url('/imgs/items/gunpowder.png');
+    --background-image-item-hopper: url('/imgs/items/hopper.png');
+    --background-image-item-iron-axe: url('/imgs/items/iron-axe.png');
+    --background-image-item-iron-boots: url('/imgs/items/iron-boots.png');
+    --background-image-item-iron-chestplate: url('/imgs/items/iron-chestplate.png');
+    --background-image-item-iron-helmet: url('/imgs/items/iron-helmet.png');
+    --background-image-item-iron-hoe: url('/imgs/items/iron-hoe.png');
+    --background-image-item-iron-horse-armor: url('/imgs/items/iron-horse-armor.png');
+    --background-image-item-iron-ingot: url('/imgs/items/iron-ingot.png');
+    --background-image-item-iron-leggings: url('/imgs/items/iron-leggings.png');
+    --background-image-item-iron-pickaxe: url('/imgs/items/iron-pickaxe.png');
+    --background-image-item-iron-shovel: url('/imgs/items/iron-shovel.png');
+    --background-image-item-iron-sword: url('/imgs/items/iron-sword.png');
+    --background-image-item-item-frame: url('/imgs/items/item-frame.png');
+    --background-image-item-lead: url('/imgs/items/lead.png');
+    --background-image-item-leather: url('/imgs/items/leather.png');
+    --background-image-item-magma-cream: url('/imgs/items/magma-cream.png');
+    --background-image-item-map-empty: url('/imgs/items/map-empty.png');
+    --background-image-item-map-filled: url('/imgs/items/map-filled.png');
+    --background-image-item-melon-speckled: url('/imgs/items/melon-speckled.png');
+    --background-image-item-melon: url('/imgs/items/melon.png');
+    --background-image-item-minecart-chest: url('/imgs/items/minecart-chest.png');
+    --background-image-item-minecart-command-block: url('/imgs/items/minecart-command-block.png');
+    --background-image-item-minecart-furnace: url('/imgs/items/minecart-furnace.png');
+    --background-image-item-minecart-hopper: url('/imgs/items/minecart-hopper.png');
+    --background-image-item-minecart-normal: url('/imgs/items/minecart-normal.png');
+    --background-image-item-minecart-tnt: url('/imgs/items/minecart-tnt.png');
+    --background-image-item-mushroom-stew: url('/imgs/items/mushroom-stew.png');
+    --background-image-item-mutton-cooked: url('/imgs/items/mutton-cooked.png');
+    --background-image-item-mutton-raw: url('/imgs/items/mutton-raw.png');
+    --background-image-item-name-tag: url('/imgs/items/name-tag.png');
+    --background-image-item-nether-star: url('/imgs/items/nether-star.png');
+    --background-image-item-nether-wart: url('/imgs/items/nether-wart.png');
+    --background-image-item-netherbrick: url('/imgs/items/netherbrick.png');
+    --background-image-item-painting: url('/imgs/items/painting.png');
+    --background-image-item-paper: url('/imgs/items/paper.png');
+    --background-image-item-porkchop-cooked: url('/imgs/items/porkchop-cooked.png');
+    --background-image-item-porkchop-raw: url('/imgs/items/porkchop-raw.png');
+    --background-image-item-potato-baked: url('/imgs/items/potato-baked.png');
+    --background-image-item-potato-poisonous: url('/imgs/items/potato-poisonous.png');
+    --background-image-item-potato: url('/imgs/items/potato.png');
+    --background-image-item-prismarine-crystals: url('/imgs/items/prismarine-crystals.png');
+    --background-image-item-prismarine-shard: url('/imgs/items/prismarine-shard.png');
+    --background-image-item-pumpkin-pie: url('/imgs/items/pumpkin-pie.png');
+    --background-image-item-quartz: url('/imgs/items/quartz.png');
+    --background-image-item-quiver: url('/imgs/items/quiver.png');
+    --background-image-item-rabbit-cooked: url('/imgs/items/rabbit-cooked.png');
+    --background-image-item-rabbit-foot: url('/imgs/items/rabbit-foot.png');
+    --background-image-item-rabbit-hide: url('/imgs/items/rabbit-hide.png');
+    --background-image-item-rabbit-raw: url('/imgs/items/rabbit-raw.png');
+    --background-image-item-rabbit-stew: url('/imgs/items/rabbit-stew.png');
+    --background-image-item-record-11: url('/imgs/items/record-11.png');
+    --background-image-item-record-13: url('/imgs/items/record-13.png');
+    --background-image-item-record-blocks: url('/imgs/items/record-blocks.png');
+    --background-image-item-record-cat: url('/imgs/items/record-cat.png');
+    --background-image-item-record-chirp: url('/imgs/items/record-chirp.png');
+    --background-image-item-record-far: url('/imgs/items/record-far.png');
+    --background-image-item-record-mall: url('/imgs/items/record-mall.png');
+    --background-image-item-record-mellohi: url('/imgs/items/record-mellohi.png');
+    --background-image-item-record-stal: url('/imgs/items/record-stal.png');
+    --background-image-item-record-strad: url('/imgs/items/record-strad.png');
+    --background-image-item-record-wait: url('/imgs/items/record-wait.png');
+    --background-image-item-record-ward: url('/imgs/items/record-ward.png');
+    --background-image-item-redstone-dust: url('/imgs/items/redstone-dust.png');
+    --background-image-item-reeds: url('/imgs/items/reeds.png');
+    --background-image-item-repeater: url('/imgs/items/repeater.png');
+    --background-image-item-rotten-flesh: url('/imgs/items/rotten-flesh.png');
+    --background-image-item-ruby: url('/imgs/items/ruby.png');
+    --background-image-item-saddle: url('/imgs/items/saddle.png');
+    --background-image-item-seeds-melon: url('/imgs/items/seeds-melon.png');
+    --background-image-item-seeds-pumpkin: url('/imgs/items/seeds-pumpkin.png');
+    --background-image-item-seeds-wheat: url('/imgs/items/seeds-wheat.png');
+    --background-image-item-shears: url('/imgs/items/shears.png');
+    --background-image-item-sign: url('/imgs/items/sign.png');
+    --background-image-item-slimeball: url('/imgs/items/slimeball.png');
+    --background-image-item-snowball: url('/imgs/items/snowball.png');
+    --background-image-item-spider-eye-fermented: url('/imgs/items/spider-eye-fermented.png');
+    --background-image-item-spider-eye: url('/imgs/items/spider-eye.png');
+    --background-image-item-stick: url('/imgs/items/stick.png');
+    --background-image-item-stone-axe: url('/imgs/items/stone-axe.png');
+    --background-image-item-stone-hoe: url('/imgs/items/stone-hoe.png');
+    --background-image-item-stone-pickaxe: url('/imgs/items/stone-pickaxe.png');
+    --background-image-item-stone-shovel: url('/imgs/items/stone-shovel.png');
+    --background-image-item-stone-sword: url('/imgs/items/stone-sword.png');
+    --background-image-item-string: url('/imgs/items/string.png');
+    --background-image-item-sugar: url('/imgs/items/sugar.png');
+    --background-image-item-wheat: url('/imgs/items/wheat.png');
+    --background-image-item-wood-axe: url('/imgs/items/wood-axe.png');
+    --background-image-item-wood-hoe: url('/imgs/items/wood-hoe.png');
+    --background-image-item-wood-pickaxe: url('/imgs/items/wood-pickaxe.png');
+    --background-image-item-wood-shovel: url('/imgs/items/wood-shovel.png');
+    --background-image-item-wood-sword: url('/imgs/items/wood-sword.png');
+    --background-image-item-wooden-armorstand: url('/imgs/items/wooden-armorstand.png');
+    --background-image-painting-alban: url('/imgs/paintings/alban.png');
+    --background-image-painting-aztec: url('/imgs/paintings/aztec.png');
+    --background-image-painting-aztec2: url('/imgs/paintings/aztec2.png');
+    --background-image-painting-bomb: url('/imgs/paintings/bomb.png');
+    --background-image-painting-burning-skull: url('/imgs/paintings/burning-skull.png');
+    --background-image-painting-bust: url('/imgs/paintings/bust.png');
+    --background-image-painting-courbet: url('/imgs/paintings/courbet.png');
+    --background-image-painting-creebet: url('/imgs/paintings/creebet.png');
+    --background-image-painting-fighters: url('/imgs/paintings/fighters.png');
+    --background-image-painting-graham: url('/imgs/paintings/graham.png');
+    --background-image-painting-kebab: url('/imgs/paintings/kebab.png');
+    --background-image-painting-kong: url('/imgs/paintings/kong.png');
+    --background-image-painting-match: url('/imgs/paintings/match.png');
+    --background-image-painting-pigscene: url('/imgs/paintings/pigscene.png');
+    --background-image-painting-plant: url('/imgs/paintings/plant.png');
+    --background-image-painting-pointer: url('/imgs/paintings/pointer.png');
+    --background-image-painting-pool: url('/imgs/paintings/pool.png');
+    --background-image-painting-sea: url('/imgs/paintings/sea.png');
+    --background-image-painting-skeleton: url('/imgs/paintings/skeleton.png');
+    --background-image-painting-skull: url('/imgs/paintings/skull.png');
+    --background-image-painting-stage: url('/imgs/paintings/stage.png');
+    --background-image-painting-sunset: url('/imgs/paintings/sunset.png');
+    --background-image-painting-void: url('/imgs/paintings/void.png');
+    --background-image-painting-wanderer: url('/imgs/paintings/wanderer.png');
+    --background-image-painting-wither: url('/imgs/paintings/wither.png');
+
+    --spacing-1\/16-block: calc(var(--block-size) / 16);
+    --spacing-1\/8-block: calc(var(--block-size) / 8);
+    --spacing-1\/4-block: calc(var(--block-size) / 4);
+    --spacing-1\/2-block: calc(var(--block-size) / 2);
+    --spacing-1-block: calc(var(--block-size) * 1);
+    --spacing-2-block: calc(var(--block-size) * 2);
+    --spacing-3-block: calc(var(--block-size) * 3);
+    --spacing-4-block: calc(var(--block-size) * 4);
+    --spacing-5-block: calc(var(--block-size) * 5);
+    --spacing-6-block: calc(var(--block-size) * 6);
+    --spacing-7-block: calc(var(--block-size) * 7);
+    --spacing-8-block: calc(var(--block-size) * 8);
+    --spacing-9-block: calc(var(--block-size) * 9);
+    --spacing-10-block: calc(var(--block-size) * 10);
+    --spacing-11-block: calc(var(--block-size) * 11);
+    --spacing-12-block: calc(var(--block-size) * 12);
+    --spacing-13-block: calc(var(--block-size) * 13);
+    --spacing-14-block: calc(var(--block-size) * 14);
+    --spacing-15-block: calc(var(--block-size) * 15);
+    --spacing-16-block: calc(var(--block-size) * 16);
+    --spacing-17-block: calc(var(--block-size) * 17);
+    --spacing-18-block: calc(var(--block-size) * 18);
+    --spacing-19-block: calc(var(--block-size) * 19);
+    --spacing-20-block: calc(var(--block-size) * 20);
+    --spacing-21-block: calc(var(--block-size) * 21);
+    --spacing-22-block: calc(var(--block-size) * 22);
+    --spacing-23-block: calc(var(--block-size) * 23);
+    --spacing-24-block: calc(var(--block-size) * 24);
+    --spacing-25-block: calc(var(--block-size) * 25);
+    --spacing-26-block: calc(var(--block-size) * 26);
+    --spacing-27-block: calc(var(--block-size) * 27);
+    --spacing-28-block: calc(var(--block-size) * 28);
+    --spacing-29-block: calc(var(--block-size) * 29);
+    --spacing-30-block: calc(var(--block-size) * 30);
+    --spacing-31-block: calc(var(--block-size) * 31);
+    --spacing-32-block: calc(var(--block-size) * 32);
+    --spacing-33-block: calc(var(--block-size) * 33);
+    --spacing-34-block: calc(var(--block-size) * 34);
+    --spacing-35-block: calc(var(--block-size) * 35);
+    --spacing-36-block: calc(var(--block-size) * 36);
+    --spacing-37-block: calc(var(--block-size) * 37);
+    --spacing-38-block: calc(var(--block-size) * 38);
+    --spacing-39-block: calc(var(--block-size) * 39);
+    --spacing-40-block: calc(var(--block-size) * 40);
+    --spacing-41-block: calc(var(--block-size) * 41);
+    --spacing-42-block: calc(var(--block-size) * 42);
+    --spacing-43-block: calc(var(--block-size) * 43);
+    --spacing-44-block: calc(var(--block-size) * 44);
+    --spacing-45-block: calc(var(--block-size) * 45);
+    --spacing-46-block: calc(var(--block-size) * 46);
+    --spacing-47-block: calc(var(--block-size) * 47);
+    --spacing-48-block: calc(var(--block-size) * 48);
+    --spacing-49-block: calc(var(--block-size) * 49);
+    --spacing-50-block: calc(var(--block-size) * 50);
+    --spacing-51-block: calc(var(--block-size) * 51);
+    --spacing-52-block: calc(var(--block-size) * 52);
+    --spacing-53-block: calc(var(--block-size) * 53);
+    --spacing-54-block: calc(var(--block-size) * 54);
+    --spacing-55-block: calc(var(--block-size) * 55);
+    --spacing-56-block: calc(var(--block-size) * 56);
+    --spacing-57-block: calc(var(--block-size) * 57);
+    --spacing-58-block: calc(var(--block-size) * 58);
+    --spacing-59-block: calc(var(--block-size) * 59);
+    --spacing-60-block: calc(var(--block-size) * 60);
+    --spacing-61-block: calc(var(--block-size) * 61);
+    --spacing-62-block: calc(var(--block-size) * 62);
+    --spacing-63-block: calc(var(--block-size) * 63);
+    --spacing-64-block: calc(var(--block-size) * 64);
+    --spacing-65-block: calc(var(--block-size) * 65);
+    --spacing-66-block: calc(var(--block-size) * 66);
+    --spacing-67-block: calc(var(--block-size) * 67);
+    --spacing-68-block: calc(var(--block-size) * 68);
+    --spacing-69-block: calc(var(--block-size) * 69);
+    --spacing-70-block: calc(var(--block-size) * 70);
+    --spacing-71-block: calc(var(--block-size) * 71);
+    --spacing-72-block: calc(var(--block-size) * 72);
+    --spacing-73-block: calc(var(--block-size) * 73);
+    --spacing-74-block: calc(var(--block-size) * 74);
+    --spacing-75-block: calc(var(--block-size) * 75);
+    --spacing-76-block: calc(var(--block-size) * 76);
+    --spacing-77-block: calc(var(--block-size) * 77);
+    --spacing-78-block: calc(var(--block-size) * 78);
+    --spacing-79-block: calc(var(--block-size) * 79);
+    --spacing-80-block: calc(var(--block-size) * 80);
+    --spacing-81-block: calc(var(--block-size) * 81);
+    --spacing-82-block: calc(var(--block-size) * 82);
+    --spacing-83-block: calc(var(--block-size) * 83);
+    --spacing-84-block: calc(var(--block-size) * 84);
+    --spacing-85-block: calc(var(--block-size) * 85);
+    --spacing-86-block: calc(var(--block-size) * 86);
+    --spacing-87-block: calc(var(--block-size) * 87);
+    --spacing-88-block: calc(var(--block-size) * 88);
+    --spacing-89-block: calc(var(--block-size) * 89);
+    --spacing-90-block: calc(var(--block-size) * 90);
+    --spacing-91-block: calc(var(--block-size) * 91);
+    --spacing-92-block: calc(var(--block-size) * 92);
+    --spacing-93-block: calc(var(--block-size) * 93);
+    --spacing-94-block: calc(var(--block-size) * 94);
+    --spacing-95-block: calc(var(--block-size) * 95);
+    --spacing-96-block: calc(var(--block-size) * 96);
+    --spacing-97-block: calc(var(--block-size) * 97);
+    --spacing-98-block: calc(var(--block-size) * 98);
+    --spacing-99-block: calc(var(--block-size) * 99);
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: theme('borderColor.DEFAULT', currentColor);
+}
+
+::before,
+::after {
+    --tw-content: '';
+}
+
+html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"); /* 4 */
+}
+
+body {
+    margin: 0;
+    line-height: inherit;
+}
+
+hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+}
+
+abbr:where([title]) {
+    text-decoration: underline dotted;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+/*
+code,
+kbd,
+samp,
+pre {
+  font-family: theme('fontFamily.mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  font-size: 1em;
+}
+*/
+
+small {
+    font-size: 80%;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+    -webkit-appearance: button;
+    background-color: transparent;
+    background-image: none;
+}
+
+:-moz-focusring {
+    outline: auto;
+}
+
+:-moz-ui-invalid {
+    box-shadow: none;
+}
+
+progress {
+    vertical-align: baseline;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto;
+}
+
+[type='search'] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+summary {
+    display: list-item;
+}
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+    margin: 0;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    padding: 0;
+}
+
+ol,
+ul,
+menu {
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    opacity: 1;
+    color: var(--color-gray-400, #9ca3af);
+}
+
+button,
+[role="button"] {
+    cursor: pointer;
+}
+
+:disabled {
+    cursor: default;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+    display: block;
+    vertical-align: middle;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+[hidden] {
+    display: none;
+}

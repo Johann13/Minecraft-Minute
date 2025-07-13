@@ -1,0 +1,44 @@
+---
+import {actions} from 'astro:actions'
+import Layout from "../layouts/Layout.astro";
+
+const {data: trustedUsers, error} = await Astro.callAction(actions.getTrustedUsers, {})
+
+
+---
+<Layout>
+  <div class="flex justify-center items-center min-h-screen py-8">
+    {
+      error && (<p class="text-red-500 font-minecraft text-shadow">{error.message}</p>)
+    }
+    {
+      trustedUsers && (
+        <div class="book p-6 max-w-2xl w-full mx-auto">
+          <h1 class="text-center font-minecrafter text-xl mb-6">Access Denied</h1>
+
+          {/* Placeholder text section that will be filled later */}
+          <div id="placeholder-text" class="mb-6 p-4 border-2 border-dashed border-gray-400 bg-gray-100">
+            <p class="italic text-gray-600 font-minecraft">To avoid multiple submissions for the same clip, only trusted users are allowed to login and submit clips. If you would like to be able to submit links or you are a <b>participant of Minecraft Minute</b>, please contact Ostof on Twitch/Discord.</p>
+          </div>
+
+          <h2 class="font-minecraft text-lg mb-4">Trusted Users:</h2>
+
+          <div class="scrollbar overflow-y-auto max-h-96">
+            <ul class="space-y-2">
+              {trustedUsers.map((user: { id: string; login: string }) => (
+                <li class="font-minecraft p-2 border-b border-gray-300 flex items-center">
+                  <span class="mr-2">➤</span> {user.login}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="mt-6 text-center">
+            <p class="font-minecraft text-sm">Only trusted users can access this page.</p>
+            <a href="/" class="font-minecraft text-sm text-blue-600 hover:text-blue-800 mt-2 inline-block">← Back to Home</a>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</Layout>

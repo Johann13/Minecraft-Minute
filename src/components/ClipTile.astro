@@ -1,0 +1,75 @@
+---
+// TableClipTile.astro - Component for displaying a clip clip with a table-based design
+// Props: clip - An object containing clip and vod information
+
+// Define the props interface
+interface Props {
+  clip: {
+    clipId: string
+    clipUrl: string
+    clipEmbedUrl: string
+    clipTitle: string
+    clipThumbnailUrl: string
+    clipCreatedAt: string
+    broadcasterId: string
+    broadcasterName: string
+    creatorId: string
+    creatorName: string
+    videoId: string
+    vodOffset: number
+    videoCreatedAt: string
+  };
+}
+
+// Destructure the props
+const {clip} = Astro.props;
+
+// Format the date to be more readable
+const createdDate = new Date(clip.clipCreatedAt);
+const videoCreatedDate = new Date(clip.videoCreatedAt);
+const offset = clip.vodOffset
+
+const newDate = new Date(videoCreatedDate.getTime() + (offset*1000));
+
+const formattedDate = createdDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+});
+const formattedVideoCreatedDate = videoCreatedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+});
+const newDateFormatted = newDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+});
+---
+
+<table class="table w-full">
+    <tbody class="block sm:table-row-group">
+    <tr class="block sm:table-row">
+        <td class="block w-full sm:table-cell sm:w-1/3 p-2">
+            <div class="relative aspect-video overflow-hidden">
+                <img src={clip.clipThumbnailUrl} alt={clip.clipTitle} class="w-full h-full object-cover"/>
+            </div>
+        </td>
+        <td class="block w-full sm:table-cell p-2">
+            <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
+            <p class="text-sm text-shadow-sm">{formattedDate}</p>
+            <div class="flex gap-3 mt-4">
+                <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
+                <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank" class="button px-2 py-1 text-center">Watch VOD</a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

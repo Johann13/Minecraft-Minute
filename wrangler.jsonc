@@ -1,0 +1,40 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "minecraft-minute",
+  "main": "./dist/_worker.js/index.js",
+  // Update to today's date
+  "compatibility_date": "2025-03-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "prod-d1-minecraft-minute",
+      "database_id": "f604fd69-dd75-4508-802e-c11305c1919d",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "80ce7f58674e4d10bb079300cebcdb52"
+    }
+  ],
+  "vars": {
+    "TWITCH_CLIENT_ID": "<PLACEHOLDER>",
+    "TWITCH_CLIENT_SECRET": "<PLACEHOLDER>",
+    "TWITCH_REDIRECT_URI": "<PLACEHOLDER>"
+  },
+  "routes": [
+    {
+      "pattern": "minecraft-minute.ostof.dev",
+      "custom_domain": true
+    }
+  ]
+}
