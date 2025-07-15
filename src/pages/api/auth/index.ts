@@ -1,7 +1,7 @@
 import type {APIRoute} from "astro";
 import {generateState} from "arctic";
 
-export const  GET: APIRoute = (ctx) => {
+export const GET: APIRoute = (ctx) => {
   const state = generateState();
 
   const params = new URLSearchParams({
