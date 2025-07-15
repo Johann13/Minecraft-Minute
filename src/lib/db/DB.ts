@@ -108,36 +108,33 @@ export class DB {
 
   async getClips(order: 'newestfirst' | 'oldestfirst' = 'oldestfirst') {
     const clipsResult = await this.db
-      .select().from(clips)
+      .select()
+      .from(clips)
       .all()
 
     const startIndex = 2
 
+    const sortedClips = clipsResult.toSorted((a, b) => {
+      const aVideoCreatedAt = new Date(a.videoCreatedAt)
+      const aOffset = a.vodOffset
+      const aDate = new Date(aVideoCreatedAt.getTime() + (aOffset * 1000))
+
+      const bVideoCreatedAt = new Date(b.videoCreatedAt)
+      const bOffset = b.vodOffset
+      const bDate = new Date(bVideoCreatedAt.getTime() + (bOffset * 1000))
+
+      return aDate.getTime() - bDate.getTime()
+    }).map((x, i) => {
+      return {
+        ...x,
+        index: i + startIndex,
+      }
+    })
 
     if (order === 'oldestfirst') {
-      return clipsResult.toSorted((a, b) => {
-        const aVideoCreatedAt = new Date(a.videoCreatedAt)
-        const aOffset = a.vodOffset
-        const aDate = new Date(aVideoCreatedAt.getTime() + (aOffset * 1000))
-
-        const bVideoCreatedAt = new Date(b.videoCreatedAt)
-        const bOffset = b.vodOffset
-        const bDate = new Date(bVideoCreatedAt.getTime() + (bOffset * 1000))
-
-        return aDate.getTime() - bDate.getTime()
-      })
+      return sortedClips
     } else {
-      return clipsResult.toSorted((a, b) => {
-        const aVideoCreatedAt = new Date(a.videoCreatedAt)
-        const aOffset = a.vodOffset
-        const aDate = new Date(aVideoCreatedAt.getTime() + (aOffset * 1000))
-
-        const bVideoCreatedAt = new Date(b.videoCreatedAt)
-        const bOffset = b.vodOffset
-        const bDate = new Date(bVideoCreatedAt.getTime() + (bOffset * 1000))
-
-        return bDate.getTime() - aDate.getTime()
-      })
+      return sortedClips.reverse()
     }
   }
 }
