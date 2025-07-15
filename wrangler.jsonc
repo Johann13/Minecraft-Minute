@@ -26,6 +26,12 @@
       "id": "80ce7f58674e4d10bb079300cebcdb52"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "minecraft-minute"
+    }
+  ],
   "keep_vars": true,
   "vars": {
     "TWITCH_CLIENT_ID": "<PLACEHOLDER>",
