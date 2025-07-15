@@ -5,6 +5,7 @@
 // Define the props interface
 interface Props {
   clip: {
+    index: number
     clipId: string
     clipUrl: string
     clipEmbedUrl: string
@@ -29,7 +30,7 @@ const createdDate = new Date(clip.clipCreatedAt);
 const videoCreatedDate = new Date(clip.videoCreatedAt);
 const offset = clip.vodOffset
 
-const newDate = new Date(videoCreatedDate.getTime() + (offset*1000));
+const newDate = new Date(videoCreatedDate.getTime() + (offset * 1000));
 
 const formattedDate = createdDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -63,11 +64,19 @@ const newDateFormatted = newDate.toLocaleDateString('en-US', {
             </div>
         </td>
         <td class="block w-full sm:table-cell p-2">
-            <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
-            <p class="text-sm text-shadow-sm">{newDateFormatted}</p>
+            <div class="flex flex-row justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
+                    <p class="text-sm text-shadow-sm">{newDateFormatted}</p>
+                </div>
+                <div class="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center">
+                    <p class="font-minecraft text-sm">#{clip.index}</p>
+                </div>
+            </div>
             <div class="flex gap-3 mt-4">
                 <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
-                <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank" class="button px-2 py-1 text-center">Watch VOD</a>
+                <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank"
+                   class="button px-2 py-1 text-center">Watch VOD</a>
             </div>
         </td>
     </tr>
