@@ -1,9 +1,9 @@
 import {DrizzleD1Database} from "drizzle-orm/d1";
 import {getDB} from "./getDB.ts";
-import type {TwitchAPIUser} from "../model/twitch.ts";
 import {clips, trustedUsers, users} from "./schema/schema.ts";
 import {eq} from "drizzle-orm";
 import {TwitchWebService} from "../web-services/TwitchWebService.ts";
+import type {TwitchAPIUser} from "../model/TwitchAPIModel.ts";
 
 export class DB {
 
@@ -111,16 +111,31 @@ export class DB {
       .select().from(clips)
       .all()
 
+    const startIndex = 2
+
+
     if (order === 'oldestfirst') {
       return clipsResult.toSorted((a, b) => {
-        const aDate = new Date(a.clipCreatedAt)
-        const bDate = new Date(b.clipCreatedAt)
+        const aVideoCreatedAt = new Date(a.videoCreatedAt)
+        const aOffset = a.vodOffset
+        const aDate = new Date(aVideoCreatedAt.getTime() + (aOffset * 1000))
+
+        const bVideoCreatedAt = new Date(b.videoCreatedAt)
+        const bOffset = b.vodOffset
+        const bDate = new Date(bVideoCreatedAt.getTime() + (bOffset * 1000))
+
         return aDate.getTime() - bDate.getTime()
       })
     } else {
       return clipsResult.toSorted((a, b) => {
-        const aDate = new Date(a.clipCreatedAt)
-        const bDate = new Date(b.clipCreatedAt)
+        const aVideoCreatedAt = new Date(a.videoCreatedAt)
+        const aOffset = a.vodOffset
+        const aDate = new Date(aVideoCreatedAt.getTime() + (aOffset * 1000))
+
+        const bVideoCreatedAt = new Date(b.videoCreatedAt)
+        const bOffset = b.vodOffset
+        const bDate = new Date(bVideoCreatedAt.getTime() + (bOffset * 1000))
+
         return bDate.getTime() - aDate.getTime()
       })
     }
