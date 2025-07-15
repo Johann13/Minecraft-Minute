@@ -64,7 +64,7 @@ const newDateFormatted = newDate.toLocaleDateString('en-US', {
         </td>
         <td class="block w-full sm:table-cell p-2">
             <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
-            <p class="text-sm text-shadow-sm">{formattedDate}</p>
+            <p class="text-sm text-shadow-sm">{newDateFormatted}</p>
             <div class="flex gap-3 mt-4">
                 <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
                 <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank" class="button px-2 py-1 text-center">Watch VOD</a>
