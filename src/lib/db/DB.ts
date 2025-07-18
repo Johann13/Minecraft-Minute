@@ -1,9 +1,12 @@
 import {DrizzleD1Database} from "drizzle-orm/d1";
 import {getDB} from "./getDB.ts";
 import {clips, trustedUsers, users} from "./schema/schema.ts";
-import {eq} from "drizzle-orm";
+import {eq, type InferInsertModel} from "drizzle-orm";
 import {TwitchWebService} from "../web-services/TwitchWebService.ts";
 import type {TwitchAPIUser} from "../model/TwitchAPIModel.ts";
+
+
+type InsertClip = InferInsertModel<typeof clips>
 
 export class DB {
 
@@ -106,13 +109,24 @@ export class DB {
       .all()
   }
 
+  addClip(clipObject: InsertClip) {
+    console.log('addClips',(clipObject))
+    return this.db.insert(clips)
+      .values(clipObject)
+      .onConflictDoUpdate({
+        target: clips.clipId,
+        set: clipObject
+      })
+      .returning()
+  }
+
   async getClips(order: 'newestfirst' | 'oldestfirst' = 'oldestfirst') {
     const clipsResult = await this.db
       .select()
       .from(clips)
       .all()
 
-    const startIndex = 2
+    const startIndex = 1
 
     const sortedClips = clipsResult.toSorted((a, b) => {
       const aVideoCreatedAt = new Date(a.videoCreatedAt)
