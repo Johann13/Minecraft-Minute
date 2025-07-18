@@ -75,8 +75,8 @@ const newDateFormatted = newDate.toLocaleDateString('en-US', {
             </div>
             <div class="flex gap-3 mt-4">
                 <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
-                <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank"
-                   class="button px-2 py-1 text-center">Watch VOD</a>
+                {clip.videoId!=='' && <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank"
+                    class="button px-2 py-1 text-center">Watch VOD</a>}
             </div>
         </td>
     </tr>
