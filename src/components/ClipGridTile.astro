@@ -48,7 +48,7 @@ const formatter = new Intl.DateTimeFormat(languages, {
 
 const newDateFormatted = formatter.format(newDate);
 
-const embedUrl = `${clip.clipEmbedUrl}&parent=localhost&parent=minecraft-minute.ostof.dev`
+const embedUrl = `${clip.clipEmbedUrl}&parent=minecraft-minute.ostof.dev`
 
 const hasEmbedUrl = clip.clipEmbedUrl.includes('https://clips.twitch.tv')
 
@@ -59,19 +59,14 @@ const shouldShowEmbed = embed && hasEmbedUrl
     <tbody class="block sm:table-row-group">
     <tr class="block sm:table-row">
         <td class="block w-full sm:table-cell sm:w-1/3 p-2">
-            <div class="relative aspect-video overflow-hidden">
-              {!shouldShowEmbed && (<img src={clip.clipThumbnailUrl} alt={clip.clipTitle} class="w-full h-full object-cover"/>)}
-              {shouldShowEmbed &&
-                (
-                        <iframe
-                                src={embedUrl}
-                                frameborder="0"
-                                allowfullscreen="true"
-                                scrolling="no"
-                                allow="autoplay; fullscreen"
-                                class="w-full h-full absolute top-0 left-0"
-                                title={clip.clipTitle}
-                        ></iframe>)}
+            <div class="relative aspect-video overflow-hidden lazy-embed-container"
+                 data-clip-id={clip.clipId}
+                 data-embed-url={embedUrl}
+                 data-clip-title={clip.clipTitle}
+                 data-should-embed={shouldShowEmbed.toString()}>
+                {!shouldShowEmbed && <img src={clip.clipThumbnailUrl} alt={clip.clipTitle}
+                      class="w-full h-full object-cover lazy-embed-thumbnail"/>}
+                {shouldShowEmbed && <div class="lazy-embed-placeholder"></div>}
             </div>
         </td>
         <td class="block w-full sm:table-cell p-2">

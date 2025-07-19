@@ -48,7 +48,7 @@ const formatter = new Intl.DateTimeFormat(languages, {
 
 const newDateFormatted = formatter.format(newDate);
 
-const embedUrl = `${clip.clipEmbedUrl}&parent=localhost&parent=minecraft-minute.ostof.dev`
+const embedUrl = `${clip.clipEmbedUrl}&parent=minecraft-minute.ostof.dev`
 
 const hasEmbedUrl = clip.clipEmbedUrl.includes('https://clips.twitch.tv')
 
@@ -60,21 +60,18 @@ const shouldShowEmbed = embed && hasEmbedUrl
     <tbody class="block sm:table-row-group">
     <tr class="block sm:table-row">
         <!-- Left side: thumbnail -->
-        <td class="block w-full sm:table-cell sm:w-1/2 p-2">
-            <div class="relative aspect-video overflow-hidden">
-              {!shouldShowEmbed && (<img src={clip.clipThumbnailUrl} alt={clip.clipTitle} class="w-full h-full object-cover"/>)}
-              {shouldShowEmbed && (
-                      <iframe
-                              src={embedUrl}
-                              frameborder="0"
-                              allowfullscreen="true"
-                              scrolling="no"
-                              allow="autoplay; fullscreen"
-                              class="w-full h-full absolute top-0 left-0"
-                              title={clip.clipTitle}
-                      ></iframe>)}
+        <td class={`block w-full sm:table-cell ${shouldShowEmbed ? 'sm:w-1/2' : 'sm:w-1/3'} p-2`}>
+            <div class="relative aspect-video overflow-hidden lazy-embed-container"
+                 data-clip-id={clip.clipId}
+                 data-embed-url={embedUrl}
+                 data-clip-title={clip.clipTitle}
+                 data-should-embed={shouldShowEmbed.toString()}>
+                {!shouldShowEmbed && <img src={clip.clipThumbnailUrl} alt={clip.clipTitle}
+                                          class="w-full h-full object-cover lazy-embed-thumbnail"/>}
+                {shouldShowEmbed && <div class="lazy-embed-placeholder"></div>}
             </div>
         </td>
+
 
         <!-- Right side: content -->
         <td class="block w-full sm:table-cell h-full">
@@ -82,22 +79,22 @@ const shouldShowEmbed = embed && hasEmbedUrl
                 <!-- Top section: header and index badge -->
                 <div class="flex flex-row justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
-                        <p class="text-sm text-shadow-sm">{newDateFormatted}</p>
+                        <h3 class="text-xl font-minecraft text-shadow">{clip.broadcasterName}</h3>
+                        <p class="text-base text-shadow-sm">{newDateFormatted}</p>
                     </div>
                     <div class="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center">
-                        <p class="font-minecraft text-sm">#{clip.index}</p>
+                        <p class="font-minecraft text-base">#{clip.index}</p>
                     </div>
                 </div>
 
                 <!-- Bottom section: buttons -->
                 <div class="flex gap-3 mt-4">
-                    <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
+                    <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center text-base">View Clip</a>
                   {clip.videoId !== '' && (
                           <a
                                   href={`https://www.twitch.tv/videos/${clip.videoId}`}
                                   target="_blank"
-                                  class="button px-2 py-1 text-center"
+                                  class="button px-2 py-1 text-center text-base"
                           >
                               Watch VOD
                           </a>
