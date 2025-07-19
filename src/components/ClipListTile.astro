@@ -1,0 +1,110 @@
+---
+// TableClipTile.astro - Component for displaying a clip clip with a table-based design
+// Props: clip - An object containing clip and vod information
+
+// Define the props interface
+
+import {parseAcceptHeader} from "../lib/utils/parseAcceptHeader";
+interface Props {
+  embed: boolean
+  clip: {
+    index: number
+    clipId: string
+    clipUrl: string
+    clipEmbedUrl: string
+    clipTitle: string
+    clipThumbnailUrl: string
+    clipCreatedAt: string
+    broadcasterId: string
+    broadcasterName: string
+    creatorId: string
+    creatorName: string
+    videoId: string
+    vodOffset: number
+    videoCreatedAt: string
+  };
+}
+
+// Destructure the props
+const {embed, clip} = Astro.props;
+
+// Format the date to be more readable
+const videoCreatedDate = new Date(clip.videoCreatedAt);
+const offset = clip.vodOffset
+
+const newDate = new Date(videoCreatedDate.getTime() + (offset * 1000));
+const acceptLanguage = Astro.request.headers.get('accept-language') || 'en-US';
+
+const languages = parseAcceptHeader(acceptLanguage)
+
+const formatter = new Intl.DateTimeFormat(languages, {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  timeZoneName: undefined,
+});
+
+const newDateFormatted = formatter.format(newDate);
+
+const embedUrl = `${clip.clipEmbedUrl}&parent=localhost&parent=minecraft-minute.ostof.dev`
+
+const hasEmbedUrl = clip.clipEmbedUrl.includes('https://clips.twitch.tv')
+
+const shouldShowEmbed = embed && hasEmbedUrl
+
+---
+
+<table class="table w-full h-full">
+    <tbody class="block sm:table-row-group">
+    <tr class="block sm:table-row">
+        <!-- Left side: thumbnail -->
+        <td class="block w-full sm:table-cell sm:w-1/2 p-2">
+            <div class="relative aspect-video overflow-hidden">
+              {!shouldShowEmbed && (<img src={clip.clipThumbnailUrl} alt={clip.clipTitle} class="w-full h-full object-cover"/>)}
+              {shouldShowEmbed && (
+                      <iframe
+                              src={embedUrl}
+                              frameborder="0"
+                              allowfullscreen="true"
+                              scrolling="no"
+                              allow="autoplay; fullscreen"
+                              class="w-full h-full absolute top-0 left-0"
+                              title={clip.clipTitle}
+                      ></iframe>)}
+            </div>
+        </td>
+
+        <!-- Right side: content -->
+        <td class="block w-full sm:table-cell h-full">
+            <div class="w-full h-full flex flex-col justify-between p-2">
+                <!-- Top section: header and index badge -->
+                <div class="flex flex-row justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
+                        <p class="text-sm text-shadow-sm">{newDateFormatted}</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center">
+                        <p class="font-minecraft text-sm">#{clip.index}</p>
+                    </div>
+                </div>
+
+                <!-- Bottom section: buttons -->
+                <div class="flex gap-3 mt-4">
+                    <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
+                  {clip.videoId !== '' && (
+                          <a
+                                  href={`https://www.twitch.tv/videos/${clip.videoId}`}
+                                  target="_blank"
+                                  class="button px-2 py-1 text-center"
+                          >
+                              Watch VOD
+                          </a>
+                  )}
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

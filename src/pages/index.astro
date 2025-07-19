@@ -2,9 +2,10 @@
 import {actions} from "astro:actions";
 import Layout from '../layouts/Layout.astro';
 import AddClipForm from "../components/AddClipForm";
-import ClipTile from "../components/ClipTile.astro";
 import LoginSection from "../components/LoginSection.astro";
 import ExplainerSection from "../components/ExplainerSection";
+import ClipGridTile from "../components/ClipGridTile.astro";
+import ClipListTile from "../components/ClipListTile.astro";
 
 const data = [
   {
@@ -190,11 +191,16 @@ clip: {
 }
 */
 const {data: clips, error} = await Astro.callAction(actions.getClips, order)
+
+const embedStr =  Astro.url.searchParams.get('embed') ?? 'false'
+
+const embed = embedStr === 'true'
+
+
 ---
 
 <Layout>
     <div class="max-w-[1200px] mx-auto p-8 flex flex-col gap-6">
-
       {user && (
               <AddClipForm client:only="solid-js"/>)}
 
@@ -230,15 +236,51 @@ const {data: clips, error} = await Astro.callAction(actions.getClips, order)
                 }
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {clips.map(clip => (
-                        <ClipTile clip={clip}/>
-                ))}
+              <div id="clips-container">
+                  <!-- Grid view will be shown when layout setting is "grid" -->
+                  <div id="grid-view" class="grid grid-cols-1 md:grid-cols-2 gap-4" style="display: none;">
+                    {clips.map(clip => (
+                            <ClipGridTile clip={clip} embed={embed}/>
+                    ))}
+                  </div>
+
+                  <!-- List view will be shown when layout setting is "list" -->
+                  <div id="list-view" class="flex flex-col gap-4" style="display: none;">
+                    {clips.map(clip => (
+                            <ClipGridTile clip={clip} embed={embed}/>
+                    ))}
+                  </div>
               </div>
+
               <ExplainerSection client:only="solid-js"/>
       )}
 
+        <script>
+          // Function to apply layout setting from localStorage
+          function applyLayoutSetting() {
+            // Get layout setting from localStorage, default to "list" if not set
+            const settings = JSON.parse(localStorage.getItem('minecraft-minute-settings') || '{"layout": "list"}');
+            const layoutValue = settings.layout || 'list';
+
+            // Get the view elements
+            const gridView = document.getElementById('grid-view');
+            const listView = document.getElementById('list-view');
+
+            // Show the appropriate view based on the layout setting
+            if (layoutValue === 'grid') {
+              gridView.style.display = 'grid';
+              listView.style.display = 'none';
+            } else {
+              gridView.style.display = 'none';
+              listView.style.display = 'flex';
+            }
+          }
+
+          // Apply layout setting when the page loads
+          document.addEventListener('DOMContentLoaded', applyLayoutSetting);
+        </script>
+
       {!user && (
-              <LoginSection />)}
+              <LoginSection/>)}
     </div>
 </Layout>
