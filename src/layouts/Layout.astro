@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
+import SettingsButton from "../components/SettingsButton.astro";
+import SettingsModal from "../components/SettingsModal.astro";
 ---
 <!doctype html>
 <html lang="en">
@@ -16,6 +18,10 @@ import Footer from "../components/Footer.astro";
 <header class="relative">
     <div class="h-1-block w-full bg-block-grass-side bg-repeat-x"/>
     <img src="/imgs/mm-header.png" alt="logo" class="absolute top-0 left-1/2 transform -translate-x-1/2 h-1-block"/>
+    <div class="absolute top-1-block right-1-block">
+        <SettingsButton />
+    </div>
+    <SettingsModal />
 </header>
 <main class="mt-3-block z-10">
     <slot/>

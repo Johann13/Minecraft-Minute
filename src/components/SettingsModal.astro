@@ -1,0 +1,226 @@
+---
+---
+<dialog id="settings-modal" class="settings-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="font-minecraft text-shadow text-2xl bold">Settings</h2>
+    </div>
+    <div class="modal-body">
+      <form id="settings-form">
+        <div class="setting-group">
+          <label class="font-minecraft text-shadow">Layout</label>
+          <div class="radio-options">
+            <div class="radio-option">
+              <input type="radio" id="layoutList" name="layout" value="list" />
+              <label for="layoutList" class="font-minecraft text-shadow">List</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="layoutGrid" name="layout" value="grid" />
+              <label for="layoutGrid" class="font-minecraft text-shadow">Grid</label>
+            </div>
+          </div>
+        </div>
+        <div class="button-container">
+          <button type="submit" id="save-settings" class="save-button font-minecraft text-shadow">Done</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .settings-modal {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+    max-width: 500px;
+    width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .settings-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-content {
+    background-image: var(--background-image-sign);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 1.5rem;
+    color: white;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .close-button {
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    background-size: cover;
+    background-image: url('/imgs/ui/button-inside.png');
+    border-width: 2px;
+    border-style: solid;
+    border-image: url('/imgs/ui/button-border.png');
+    border-image-width: 2px;
+    border-image-slice: 10% 3%;
+    border-image-repeat: stretch;
+  }
+
+  .close-button:hover {
+    background-image: url('/imgs/ui/button-inside-hover.png');
+    color: #fef08a;
+    border-image: url('/imgs/ui/button-border-hover.png');
+  }
+
+  .modal-body {
+    padding: 0.5rem 0;
+  }
+
+  .setting-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .radio-option input[type="radio"] {
+    cursor: pointer;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .save-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-size: cover;
+    background-image: url('/imgs/ui/button-inside.png');
+    border-width: 2px;
+    border-style: solid;
+    border-image: url('/imgs/ui/button-border.png');
+    border-image-width: 2px;
+    border-image-slice: 10% 3%;
+    border-image-repeat: stretch;
+  }
+
+  .save-button:hover {
+    background-image: url('/imgs/ui/button-inside-hover.png');
+    color: #fef08a;
+    border-image: url('/imgs/ui/button-border-hover.png');
+  }
+
+  /* Layout styles */
+  :global(.layout-list .grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  :global(.layout-grid .grid) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  @media (min-width: 768px) {
+    :global(.layout-grid .grid) {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+</style>
+
+<script>
+  // Function to load settings from localStorage
+  function loadSettings() {
+    const settings = JSON.parse(localStorage.getItem('minecraft-minute-settings') || '{"layout": "list"}');
+
+    // Set form values based on stored settings
+    if (settings.layout) {
+      const layoutOption = document.getElementById(`layout${settings.layout.charAt(0).toUpperCase() + settings.layout.slice(1)}`);
+      if (layoutOption) {
+        layoutOption.checked = true;
+      }
+    } else {
+      // Default to list if no layout is set
+      document.getElementById('layoutList').checked = true;
+    }
+
+    // Apply settings to the page
+    applySettings(settings);
+  }
+
+  // Function to save settings to localStorage
+  function saveSettings(event) {
+    event.preventDefault();
+
+    const layoutValue = document.querySelector('input[name="layout"]:checked')?.value || 'list';
+
+    const settings = {
+      layout: layoutValue
+    };
+
+    localStorage.setItem('minecraft-minute-settings', JSON.stringify(settings));
+
+    // Close the modal
+    document.getElementById('settings-modal').close();
+
+    // Refresh the page to apply the new settings
+    window.location.reload();
+  }
+
+  // Function to apply settings to the page
+  function applySettings(settings) {
+    // Apply layout setting
+    const layoutValue = settings.layout || 'list';
+
+    // Remove any existing layout classes
+    document.body.classList.remove('layout-list', 'layout-grid');
+
+    // Add the current layout class
+    document.body.classList.add(`layout-${layoutValue}`);
+
+    // You can add more specific layout logic here as needed
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Load settings when the page loads
+    loadSettings();
+
+    // Set up event listeners
+    const settingsForm = document.getElementById('settings-form');
+    const settingsModal = document.getElementById('settings-modal');
+
+    if (settingsForm) {
+      settingsForm.addEventListener('submit', saveSettings);
+    }
+
+    // Close modal when clicking on backdrop
+    settingsModal.addEventListener('click', (event) => {
+      if (event.target === settingsModal) {
+        settingsModal.close();
+      }
+    });
+  });
+</script>
