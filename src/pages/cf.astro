@@ -1,0 +1,27 @@
+---
+import {parseAcceptHeader} from "../lib/utils/parseAcceptHeader";
+const user = Astro.locals.user
+if (!user) {
+  return Astro.redirect('/')
+}
+const cf = Astro.locals.runtime.cf
+const acceptLanguage = Astro.request.headers.get('accept-language') || 'en-US';
+const preferredLocale = acceptLanguage.split(',')[0].trim();
+const languages = parseAcceptHeader(acceptLanguage)
+
+const formatter = new Intl.DateTimeFormat(languages, {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  timeZoneName: undefined,
+  // hour12: false,
+  // hour12: true // Use 12-hour clock with AM/PM
+});
+---
+<p>acceptLanguage: {acceptLanguage}</p>
+<p>preferredLocale: {preferredLocale}</p>
+<p>languages: {languages}</p>
+<p>options: {JSON.stringify(formatter.resolvedOptions(), null, 2)}</p>
+<pre>{JSON.stringify(cf, null, 2)}</pre>
