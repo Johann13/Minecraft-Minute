@@ -34,8 +34,19 @@ const ExplainerSection = () => {
           </td>
         </tr>
         <Show when={isExpanded()}>
-          <tr>
-            <td colspan="2">
+          <tr class="block">
+            <td class="block md:table-cell md:w-1/2 p-2">
+              <div class="relative aspect-video overflow-hidden">
+                <iframe
+                  src="https://clips.twitch.tv/embed?clip=BoxyLachrymoseNoodlePoooound-8QhZ2tjXd_atZdAi&parent=localhost&parent=minecraft-minute.ostof.dev"
+                  frameborder="0"
+                  scrolling="no"
+                  allowfullscreen
+                  class="w-full h-full"
+                ></iframe>
+              </div>
+            </td>
+            <td class="block md:table-cell md:w-1/2 p-2">
               <div class="p-2">
                 <p class="font-minecraft text-shadow">
                   Minecraft Minute is a daily game where players share one character, each playing for one minute per
