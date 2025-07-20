@@ -34,14 +34,14 @@ const embed = embedStr === 'true'
 
       {clips && (
               <div class="flex gap-4 mb-4 justify-center">
-                  <a href="/?order=newestfirst"
+                  <a href={`/?order=newestfirst${embed ? '&embed=true' : ''}`}
                      class:list={[
                        {'underline': order === 'newestfirst'},
                        'button px-3 py-2 text-center font-minecraft',
                      ]}>
                       Newest First
                   </a>
-                  <a href="/?order=oldestfirst"
+                  <a href={`/?order=oldestfirst${embed ? '&embed=true' : ''}`}
                      class:list={[
                        {'underline': order === 'oldestfirst'},
                        'button px-3 py-2 text-center font-minecraft',
