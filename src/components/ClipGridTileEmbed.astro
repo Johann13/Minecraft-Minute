@@ -30,21 +30,21 @@ interface Props {
 const {clip} = Astro.props;
 
 // Format the date to be more readable
-const createdDate = new Date(clip.clipCreatedAt);
 const videoCreatedDate = new Date(clip.videoCreatedAt);
 const offset = clip.vodOffset
 const newDate = new Date(videoCreatedDate.getTime() + (offset * 1000));
 const acceptLanguage = Astro.request.headers.get('accept-language') || 'en-US';
-
 const languages = parseAcceptHeader(acceptLanguage)
-
+const cf = Astro.locals.runtime.cf
+const timezone = cf?.timezone ?? 'UTC'
 const formatter = new Intl.DateTimeFormat(languages, {
   year: 'numeric',
   month: 'short',
   day: 'numeric',
   hour: 'numeric',
   minute: 'numeric',
-  timeZoneName: undefined,
+  timeZoneName: 'short',
+  timeZone: timezone
 });
 
 const newDateFormatted = formatter.format(newDate);
@@ -81,10 +81,10 @@ const shouldShowEmbed = clip.clipEmbedUrl.includes('https://clips.twitch.tv')
                         </div>
                     </div>
                     <ClipButtons
-                        clipId={clip.clipId}
-                        clipUrl={clip.clipUrl}
-                        videoId={clip.videoId}
-                        className="flex gap-3 mt-4 items-end"
+                            clipId={clip.clipId}
+                            clipUrl={clip.clipUrl}
+                            videoId={clip.videoId}
+                            className="flex gap-3 mt-4 items-end"
                     >
                         <WatchedClipCheckbox clipId={clip.clipId}/>
                     </ClipButtons>

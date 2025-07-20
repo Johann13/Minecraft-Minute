@@ -33,19 +33,19 @@ const {embed, clip} = Astro.props;
 // Format the date to be more readable
 const videoCreatedDate = new Date(clip.videoCreatedAt);
 const offset = clip.vodOffset
-
 const newDate = new Date(videoCreatedDate.getTime() + (offset * 1000));
 const acceptLanguage = Astro.request.headers.get('accept-language') || 'en-US';
-
 const languages = parseAcceptHeader(acceptLanguage)
-
+const cf = Astro.locals.runtime.cf
+const timezone = cf?.timezone ?? 'UTC'
 const formatter = new Intl.DateTimeFormat(languages, {
   year: 'numeric',
   month: 'short',
   day: 'numeric',
   hour: 'numeric',
   minute: 'numeric',
-  timeZoneName: undefined,
+  timeZoneName: 'short',
+  timeZone: timezone
 });
 
 const newDateFormatted = formatter.format(newDate);
@@ -55,7 +55,6 @@ const embedUrl = `${clip.clipEmbedUrl}&parent=minecraft-minute.ostof.dev`
 const hasEmbedUrl = clip.clipEmbedUrl.includes('https://clips.twitch.tv')
 
 const shouldShowEmbed = embed && hasEmbedUrl
-
 ---
 
 <table class="table w-full h-full">
@@ -68,9 +67,10 @@ const shouldShowEmbed = embed && hasEmbedUrl
                  data-embed-url={embedUrl}
                  data-clip-title={clip.clipTitle}
                  data-should-embed={shouldShowEmbed.toString()}>
-                {!shouldShowEmbed && <img src={clip.clipThumbnailUrl} alt={clip.clipTitle}
-                                          class="w-full h-full object-cover lazy-embed-thumbnail"/>}
-                {shouldShowEmbed && <div class="lazy-embed-placeholder"></div>}
+              {!shouldShowEmbed && <img src={clip.clipThumbnailUrl} alt={clip.clipTitle}
+                                        class="w-full h-full object-cover lazy-embed-thumbnail"/>}
+              {shouldShowEmbed &&
+                      <div class="lazy-embed-placeholder"></div>}
             </div>
         </td>
 
@@ -91,12 +91,12 @@ const shouldShowEmbed = embed && hasEmbedUrl
 
                 <!-- Bottom section: buttons -->
                 <ClipButtons
-                    clipId={clip.clipId}
-                    clipUrl={clip.clipUrl}
-                    videoId={clip.videoId}
-                    className="flex gap-3 mt-4 items-end"
+                        clipId={clip.clipId}
+                        clipUrl={clip.clipUrl}
+                        videoId={clip.videoId}
+                        className="flex gap-3 mt-4 items-end"
                 >
-                    <WatchedClipCheckbox clipId={clip.clipId} />
+                    <WatchedClipCheckbox clipId={clip.clipId}/>
                 </ClipButtons>
             </div>
         </td>
