@@ -1,0 +1,68 @@
+---
+// ClipButtons.astro - Component for displaying clip action buttons
+// Props: clipId, clipUrl, videoId
+
+interface Props {
+  clipId: string;
+  clipUrl: string;
+  videoId: string;
+  className?: string; // Optional class for styling flexibility
+}
+
+// Destructure the props
+const { clipId, clipUrl, videoId, className = "flex gap-3 mt-4" } = Astro.props;
+---
+
+<div class={className}>
+  <a
+    href={clipUrl}
+    target="_blank"
+    class="button px-2 py-1 text-center view-clip-button"
+    data-clip-id={clipId}
+  >
+    View Clip
+  </a>
+  {videoId !== '' &&
+    <a
+      href={`https://www.twitch.tv/videos/${videoId}`}
+      target="_blank"
+      class="button px-2 py-1 text-center"
+    >
+      Watch VOD
+    </a>
+  }
+  <div class="flex-1"/>
+  <slot />
+</div>
+
+<script>
+  // Initialize event listeners when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const viewClipButtons = document.querySelectorAll('.view-clip-button');
+
+    // Add click event listener to each "View Clip" button
+    viewClipButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const clipId = button.getAttribute('data-clip-id');
+        if (!clipId) return;
+
+        // Get current watched clips from localStorage
+        const watchedClips = JSON.parse(localStorage.getItem('minecraft-minute-watched-clips') || '[]');
+
+        // Add clip to watched list if not already there
+        if (!watchedClips.includes(clipId)) {
+          watchedClips.push(clipId);
+
+          // Save updated watched clips to localStorage
+          localStorage.setItem('minecraft-minute-watched-clips', JSON.stringify(watchedClips));
+
+          // Update the corresponding checkbox if it exists
+          const checkbox = document.getElementById(`watched-clip-${clipId}`) as HTMLInputElement;
+          if (checkbox) {
+            checkbox.checked = true;
+          }
+        }
+      });
+    });
+  });
+</script>

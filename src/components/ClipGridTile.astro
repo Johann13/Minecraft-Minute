@@ -5,6 +5,8 @@
 // Define the props interface
 
 import {parseAcceptHeader} from "../lib/utils/parseAcceptHeader";
+import WatchedClipCheckbox from "./WatchedClipCheckbox.astro";
+import ClipButtons from "./ClipButtons.astro";
 interface Props {
   embed: boolean
   clip: {
@@ -80,11 +82,14 @@ const shouldShowEmbed = embed && hasEmbedUrl
                         <p class="font-minecraft text-sm">#{clip.index}</p>
                     </div>
                 </div>
-                <div class="flex gap-3 mt-4">
-                    <a href={clip.clipUrl} target="_blank" class="button px-2 py-1 text-center">View Clip</a>
-                  {clip.videoId !== '' && <a href={`https://www.twitch.tv/videos/${clip.videoId}`} target="_blank"
-                                             class="button px-2 py-1 text-center">Watch VOD</a>}
-                </div>
+                <ClipButtons
+                    clipId={clip.clipId}
+                    clipUrl={clip.clipUrl}
+                    videoId={clip.videoId}
+                    className="flex gap-3 mt-4 items-end"
+                >
+                    <WatchedClipCheckbox clipId={clip.clipId}/>
+                </ClipButtons>
             </div>
         </td>
     </tr>

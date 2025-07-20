@@ -1,0 +1,96 @@
+---
+// TableClipTile.astro - Component for displaying a clip clip with a table-based design
+// Props: clip - An object containing clip and vod information
+
+// Define the props interface
+
+import {parseAcceptHeader} from "../lib/utils/parseAcceptHeader";
+import WatchedClipCheckbox from "./WatchedClipCheckbox.astro";
+import ClipButtons from "./ClipButtons.astro";
+interface Props {
+  clip: {
+    index: number
+    clipId: string
+    clipUrl: string
+    clipEmbedUrl: string
+    clipTitle: string
+    clipThumbnailUrl: string
+    clipCreatedAt: string
+    broadcasterId: string
+    broadcasterName: string
+    creatorId: string
+    creatorName: string
+    videoId: string
+    vodOffset: number
+    videoCreatedAt: string
+  };
+}
+
+// Destructure the props
+const {clip} = Astro.props;
+
+// Format the date to be more readable
+const createdDate = new Date(clip.clipCreatedAt);
+const videoCreatedDate = new Date(clip.videoCreatedAt);
+const offset = clip.vodOffset
+const newDate = new Date(videoCreatedDate.getTime() + (offset * 1000));
+const acceptLanguage = Astro.request.headers.get('accept-language') || 'en-US';
+
+const languages = parseAcceptHeader(acceptLanguage)
+
+const formatter = new Intl.DateTimeFormat(languages, {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  timeZoneName: undefined,
+});
+
+const newDateFormatted = formatter.format(newDate);
+
+const embedUrl = `${clip.clipEmbedUrl}&parent=localhost&parent=minecraft-minute.ostof.dev`
+
+const shouldShowEmbed = clip.clipEmbedUrl.includes('https://clips.twitch.tv')
+---
+<div class="w-full h-full">
+    <table class="table w-full">
+        <tbody class="block">
+        <tr class="block">
+            <td class="block w-full p-2">
+                <div class="relative aspect-video overflow-hidden lazy-embed-container"
+                     data-clip-id={clip.clipId}
+                     data-embed-url={embedUrl}
+                     data-clip-title={clip.clipTitle}
+                     data-should-embed={shouldShowEmbed.toString()}>
+                  {!shouldShowEmbed && <img src={clip.clipThumbnailUrl} alt={clip.clipTitle}
+                                            class="w-full h-full object-cover lazy-embed-thumbnail"/>}
+                  {shouldShowEmbed &&
+                          <div class="lazy-embed-placeholder"></div>}
+                </div>
+            </td>
+            <td class="block w-full p-2">
+                <div class="w-full h-full flex flex-col justify-between">
+                    <div class="flex flex-row justify-between items-center">
+                        <div>
+                            <h3 class="text-lg font-minecraft text-shadow">{clip.broadcasterName}</h3>
+                            <p class="text-sm text-shadow-sm">{newDateFormatted}</p>
+                        </div>
+                        <div class="bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center">
+                            <p class="font-minecraft text-sm">#{clip.index}</p>
+                        </div>
+                    </div>
+                    <ClipButtons
+                        clipId={clip.clipId}
+                        clipUrl={clip.clipUrl}
+                        videoId={clip.videoId}
+                        className="flex gap-3 mt-4 items-end"
+                    >
+                        <WatchedClipCheckbox clipId={clip.clipId}/>
+                    </ClipButtons>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
