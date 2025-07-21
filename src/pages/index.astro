@@ -9,7 +9,7 @@ import {parseAcceptHeader} from "../lib/utils/parseAcceptHeader";
 
 const {user} = Astro.locals
 
-const order = Astro.url.searchParams.get('order') ?? 'newestfirst'
+const order = (Astro.url.searchParams.get('order') ?? 'newestfirst') as "newestfirst" | "oldestfirst"
 const {data: clips, error} = await Astro.callAction(actions.getClips, order)
 
 
@@ -40,5 +40,14 @@ const timezone = cf?.timezone ?? 'UTC'
 
         {!user && (
           <LoginSection/>)}
+
+        {
+          user && (
+            <a href="/api/auth/logout" class:list={[
+                'button px-3 py-2 text-center font-minecraft',
+            ]}>Logout</a>
+          )
+        }
+
     </div>
 </Layout>
