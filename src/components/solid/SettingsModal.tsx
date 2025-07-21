@@ -1,5 +1,4 @@
-import { type Component, createSignal, Show } from "solid-js";
-import { useSettings } from "../../lib/hooks/useSettings";
+import {type Component, Show} from "solid-js";
 import {useState} from "./MainStateProvider.tsx";
 
 interface SettingsModalProps {
@@ -8,7 +7,7 @@ interface SettingsModalProps {
 }
 
 export const SettingsModal: Component<SettingsModalProps> = (props) => {
-  const { settings } = useState();
+  const {settings} = useState();
 
   const {setLayoutToList, setLayoutToGrid, enableTwitchClips, disableTwitchClips} = settings;
 
@@ -69,14 +68,17 @@ export const SettingsModal: Component<SettingsModalProps> = (props) => {
                 <div class="setting-group">
                   <label class="font-minecraft text-shadow">Show Twitch Clips</label>
                   <div class="checkbox-option">
-                    <input
-                      type="checkbox"
-                      id="showTwitchClips"
-                      name="showTwitchClips"
-                      checked={settings.settings.showTwitchClips}
-                      onChange={(e) => e.target.checked ? enableTwitchClips() : disableTwitchClips()}
-                    />
-                    <label for="showTwitchClips" class="font-minecraft text-shadow">Show Twitch clips</label>
+                    <div class="checkbox-row">
+                      <input
+                        type="checkbox"
+                        id="showTwitchClips"
+                        name="showTwitchClips"
+                        checked={settings.settings.showTwitchClips}
+                        onChange={(e) => e.target.checked ? enableTwitchClips() : disableTwitchClips()}
+                      />
+                      <label for="showTwitchClips" class="font-minecraft text-shadow">Show Twitch clips</label>
+                    </div>
+                    <div class="warning-text">⚠️ Loading many clips might take longer</div>
                   </div>
                 </div>
 
@@ -155,8 +157,28 @@ export const SettingsModal: Component<SettingsModalProps> = (props) => {
         
         .checkbox-option {
           display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+        
+        .checkbox-row {
+          display: flex;
           align-items: center;
           gap: 0.5rem;
+        }
+        
+        .checkbox-option label {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        
+        .warning-text {
+          font-size: 0.8rem;
+          color: #ffcc00;
+          margin-left: 1.5rem;
+          font-style: italic;
         }
         
         .button-container {
