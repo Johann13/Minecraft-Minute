@@ -1,0 +1,86 @@
+---
+// WatchedClipsCounter.astro - Component for displaying how many clips have been watched
+// This component updates when a new clip has been watched
+
+interface Props {
+  numberOfClips: number
+}
+
+const {numberOfClips} = Astro.props;
+---
+
+<div class="watched-clips-counter button px-3 py-2 text-center font-minecraft flex items-center gap-2">
+    <span>Watched: <span id="watched-clips-count">0</span> / {numberOfClips}</span>
+</div>
+
+<script>
+  import {initWatchedClips} from '../lib/utils/watchedClips';
+
+  // Function to update the watched clips count display
+  function updateWatchedClipsCount() {
+    const watchedClips = JSON.parse(localStorage.getItem('minecraft-minute-watched-clips') || '[]');
+    const countElement = document.getElementById('watched-clips-count');
+    if (countElement) {
+      countElement.textContent = watchedClips.length.toString();
+    }
+  }
+
+  // Initialize the counter when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize watched clips if needed
+    initWatchedClips();
+
+    // Update the counter initially
+    updateWatchedClipsCount();
+
+    // Set up a storage event listener to update the counter when localStorage changes
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'minecraft-minute-watched-clips') {
+        updateWatchedClipsCount();
+      }
+    });
+
+    // Create a custom event listener for local updates (when the current page changes the watched status)
+    document.addEventListener('watchedClipsChanged', () => {
+      updateWatchedClipsCount();
+    });
+
+    // Use event delegation for minecraft-checkbox elements
+    document.addEventListener('change', (event) => {
+      const target = event.target;
+      if (target && target.classList && target.classList.contains('minecraft-checkbox')) {
+        // Dispatch a custom event to notify that watched clips have changed
+        document.dispatchEvent(new CustomEvent('watchedClipsChanged'));
+      }
+    });
+
+    // Use event delegation for view-clip-button elements
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      // Check if the target or any of its parents has the class 'view-clip-button'
+      const button = target.closest('.view-clip-button');
+      if (button) {
+        // Dispatch a custom event to notify that watched clips have changed
+        document.dispatchEvent(new CustomEvent('watchedClipsChanged'));
+      }
+    });
+  });
+</script>
+
+<style>
+    .watched-clips-counter {
+        background-color: #8B8B8B;
+        border: 2px solid #555;
+        color: #FFFFFF;
+        text-shadow: 2px 2px #000000;
+        transition: all 0.2s;
+    }
+
+    .watched-clips-counter:hover {
+        background-color: #A0A0A0;
+    }
+
+    .counter-icon {
+        font-size: 1.2em;
+    }
+</style>

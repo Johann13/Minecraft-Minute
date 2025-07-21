@@ -21,24 +21,24 @@ const timezone = cf?.timezone ?? 'UTC'
 
 <Layout>
     <div class="max-w-[1200px] mx-auto p-8 flex flex-col gap-6">
-        {user && (
-          <AddClipForm client:only="solid-js"/>)}
+      {user && (
+              <AddClipForm client:only="solid-js"/>)}
 
-        {error && (
-          <div class="bg-red-500 text-white p-4 rounded-md shadow-md">
-              <p class="font-bold">Error:</p>
-              <p>{error.message || JSON.stringify(error)}</p>
-          </div>
-        )}
+      {error && (
+              <div class="bg-red-500 text-white p-4 rounded-md shadow-md">
+                  <p class="font-bold">Error:</p>
+                  <p>{error.message || JSON.stringify(error)}</p>
+              </div>
+      )}
 
         <ExplainerSection client:only="solid-js"/>
 
-        {clips && (
-          <ClipsMain client:only="solid-js" clips={clips} timezone={timezone} languages={languages} initOrder={order} />
-        )}
+      {clips && (
+              <ClipsMain client:only="solid-js" clips={clips} timezone={timezone} languages={languages} initOrder={order} />
+      )}
 
 
-        {!user && (
-          <LoginSection/>)}
+      {!user && (
+              <LoginSection/>)}
     </div>
 </Layout>
