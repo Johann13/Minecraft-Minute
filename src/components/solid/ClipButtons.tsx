@@ -22,6 +22,9 @@ export const ClipButtons: Component<ClipButtonsProps> = (props) => {
         target="_blank"
         class="button px-2 py-1 text-center view-clip-button"
         data-clip-id={clipId}
+        onClick={() => {
+          add(clipId);
+        }}
       >
         View Clip
       </a>
