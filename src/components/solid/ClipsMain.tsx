@@ -38,7 +38,6 @@ const Root: Component = () => {
           <ClipsList/>
         </Match>
       </Switch>
-      <p>{JSON.stringify(settings.settings)}</p>
       <SettingsModal isOpen={isSettingsOpen()} onClose={closeSettings} />
     </div>
   );
