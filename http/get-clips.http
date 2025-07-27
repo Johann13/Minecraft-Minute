@@ -1,0 +1,10 @@
+### GET clips
+GET http://localhost:3000/api/clips
+Authorization: Bearer {{MM_TOKEN}}
+
+###
+### GET clips2
+GET https://minecraft-minute.ostof.dev/api/clips
+Authorization: Bearer {{MM_TOKEN}}
+
+###

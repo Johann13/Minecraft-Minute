@@ -1,0 +1,23 @@
+### Post raw clip to database
+POST {{BASE_URL}}/api/clips/raw
+Authorization: Bearer {{MM_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "clipId": "bsky-3luau4v375s2z",
+  "clipUrl": "https://bsky.app/profile/yogscast.com/post/3luau4v375s2z",
+  "clipEmbedUrl": "https://bsky.app/profile/yogscast.com/post/3luau4v375s2z",
+  "clipTitle": "Simon's Minecraft Minute",
+  "clipThumbnailUrl": "https://video.cdn.bsky.app/hls/did:plc:jifja3ykzfugmldkvhnp5ppy/bafkreidzst56s7f65g342qh2dkcqgprfuwhhsdfylssqowucnfjihjn6gi/thumbnail.jpg",
+  "clipCreatedAt": "2025-07-10T17:00:00Z",
+  "broadcasterId": "",
+  "broadcasterName": "SimonHoneydew",
+  "creatorId": "",
+  "creatorName": "",
+  "videoId": "",
+  "vodOffset": 0,
+  "videoCreatedAt": "2025-07-10T17:00:00Z"
+}
+
+###

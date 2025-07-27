@@ -1,0 +1,12 @@
+
+### Post clips2
+GET {{BASE_URL}}/api/clips
+Authorization: Bearer {{MM_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "url": ""
+}
+
+###
